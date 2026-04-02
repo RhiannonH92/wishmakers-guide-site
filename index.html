@@ -9,12 +9,13 @@
     body {
       font-family: 'Inter', sans-serif;
       margin: 0;
-      background: #f8fafc;
-      color: #111;
+      background: #fdfcff;
+      color: #2d2d2d;
     }
 
     nav {
-      background: white;
+      background: #ffffffcc;
+      backdrop-filter: blur(8px);
       padding: 15px 30px;
       position: sticky;
       top: 0;
@@ -24,7 +25,7 @@
     nav a {
       margin-right: 20px;
       text-decoration: none;
-      color: #111;
+      color: #444;
       font-weight: 500;
     }
 
@@ -37,32 +38,31 @@
     h1 {
       font-size: 42px;
       margin-bottom: 10px;
+      color: #6b5cff;
     }
 
     h2 {
       margin-top: 60px;
       font-size: 28px;
+      color: #444;
     }
 
     p {
       line-height: 1.6;
-      color: #444;
-    }
-
-    .hero {
-      margin-top: 40px;
+      color: #555;
     }
 
     .button {
       display: inline-block;
       margin-top: 20px;
       padding: 12px 18px;
-      background: black;
+      background: #6b5cff;
       color: white;
       text-decoration: none;
-      border-radius: 6px;
+      border-radius: 8px;
     }
 
+    /* SERVICES GRID */
     .services {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -70,11 +70,21 @@
       margin-top: 30px;
     }
 
+    /* CLICKABLE CARD */
     .card {
-      background: white;
+      background: linear-gradient(135deg, #ffe4ec, #e0f7f4, #f3e8ff);
       padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      border-radius: 12px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+    }
+
+    .card h3 {
+      margin-top: 0;
     }
 
     .price {
@@ -82,103 +92,125 @@
       margin-top: 10px;
     }
 
+    /* HIDDEN CONTENT */
+    .card-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+      margin-top: 10px;
+    }
+
+    .card.active .card-content {
+      max-height: 1000px;
+    }
+
     .footer {
       text-align: center;
       padding: 40px;
       margin-top: 60px;
       font-size: 14px;
-      color: #777;
+      color: #888;
     }
   </style>
 </head>
 
 <body>
 
-  <!-- NAVBAR -->
-  <nav>
-    <a href="#">Home</a>
-    <a href="#services">Services</a>
-    <a href="#why">Why Me</a>
-    <a href="#contact">Contact</a>
-  </nav>
+<nav>
+  <a href="#">Home</a>
+  <a href="#services">Services</a>
+  <a href="#contact">Contact</a>
+</nav>
 
-  <div class="container">
+<div class="container">
 
-    <!-- HERO -->
-    <div class="hero">
-      <h1>The Wishmaker’s Guide ✨</h1>
-      <p>Have you booked your once-in-a-lifetime trip to Walt Disney World but now feel totally overwhelmed trying to plan it?</p>
-      <p>You’ve spent so much money on your trip—don’t waste precious time wandering around aimlessly.</p>
-      <p><strong>If you don’t want to miss out… you need someone who knows the magic.</strong></p>
-      <a href="#services" class="button">View Services</a>
+  <h1>The Wishmaker’s Guide ✨</h1>
+  <p>Have you booked your once-in-a-lifetime trip to Walt Disney World but now feel totally overwhelmed trying to plan it?</p>
+  <p>You’ve spent so much money on your trip—don’t waste precious time wandering around aimlessly.</p>
+  <p><strong>If you don’t want to miss out… you need someone who knows the magic.</strong></p>
+
+  <a href="#services" class="button">View Services</a>
+
+  <h2 id="services">Services</h2>
+
+  <div class="services">
+
+    <!-- 40 MIN -->
+    <div class="card" onclick="toggleCard(this)">
+      <h3>40 min Zoom Call</h3>
+      <p class="price">£50</p>
+      <div class="card-content">
+        <p>A 1-1 zoom call at a time that suits you, where you can ask any pressing questions about your trip.</p>
+        <p>Transport, dining plans, restaurant recommendations—ask anything!</p>
+        <p>You’ll receive a follow-up email with everything discussed.</p>
+      </div>
     </div>
 
-    <!-- INTRO -->
-    <h2>Let Me Be Your Guide</h2>
-    <p>Disney World is HUGE, with hundreds of restaurants, rides and experiences.</p>
-    <p>If you’ve tried Googling and felt overwhelmed—you’re not alone.</p>
-    <p>I LOVE planning Disney trips, and I’d love to help you plan yours. I’ll help you create your dream trip—down to the smallest detail.</p>
-
-    <!-- SERVICES -->
-    <h2 id="services">Services</h2>
-
-    <div class="services">
-
-      <div class="card">
-        <h3>40 Minute Zoom Call</h3>
-        <p>Ask anything about your trip—transport, park days, restaurants. A focused session with personalised advice.</p>
-        <p class="price">£50</p>
+    <!-- 80 MIN -->
+    <div class="card" onclick="toggleCard(this)">
+      <h3>80 min Zoom Call</h3>
+      <p class="price">£100</p>
+      <div class="card-content">
+        <p>A deeper, more detailed planning session.</p>
+        <p>Includes a pre-call questionnaire so we focus on what matters most.</p>
+        <p>Perfect for first-time visitors or those needing full clarity.</p>
       </div>
-
-      <div class="card">
-        <h3>80 Minute Zoom Call</h3>
-        <p>A deeper dive into your trip with tailored recommendations, planning help and expert tips.</p>
-        <p class="price">£100</p>
-      </div>
-
-      <div class="card">
-        <h3>Itinerary Planning</h3>
-        <p>A full day-by-day personalised Disney plan tailored to your family, interests and budget.</p>
-        <p class="price">£150</p>
-      </div>
-
-      <div class="card">
-        <h3>Reservation Booking</h3>
-        <p>I’ll secure your dining and experience bookings so you don’t have to stress or wake up early.</p>
-        <p class="price">£40</p>
-      </div>
-
-      <div class="card">
-        <h3>Full Concierge Service</h3>
-        <p>Everything handled—from planning to bookings to your full itinerary.</p>
-        <p class="price">£350</p>
-      </div>
-
     </div>
 
-    <!-- WHY -->
-    <h2 id="why">Why Use a Disney Trip Planner?</h2>
+    <!-- ITINERARY -->
+    <div class="card" onclick="toggleCard(this)">
+      <h3>Itinerary Planning</h3>
+      <p class="price">£150</p>
+      <div class="card-content">
+        <p>A fully personalised day-by-day Disney itinerary.</p>
+        <p>Includes rides, food, timings, and tips tailored to your family.</p>
+        <p>Delivered via app + printable PDF.</p>
+      </div>
+    </div>
 
-    <p><strong>Save time:</strong> No more hours of research—just clear, personalised guidance.</p>
-    <p><strong>Save stress:</strong> I simplify every decision so your trip feels exciting, not overwhelming.</p>
-    <p><strong>Never miss a thing:</strong> I guide you step-by-step so nothing slips through the cracks.</p>
-    <p><strong>Insider knowledge:</strong> Real tips, real strategies, from genuine experience.</p>
+    <!-- BOOKINGS -->
+    <div class="card" onclick="toggleCard(this)">
+      <h3>Reservation Booking</h3>
+      <p class="price">£40</p>
+      <div class="card-content">
+        <p>I handle your restaurant and experience bookings.</p>
+        <p>No early mornings, no stress—just results.</p>
+        <p>Includes strategy for high-demand reservations.</p>
+      </div>
+    </div>
 
-    <!-- ABOUT -->
-    <h2>About Me</h2>
-    <p>I’m not a travel agent—I’m here to give honest advice and help you get the absolute most out of your Disney trip.</p>
-    <p>With years of experience and a genuine love for Disney, I’ll help you create a stress-free, magical holiday full of unforgettable moments.</p>
-
-    <!-- CTA -->
-    <h2 id="contact">Ready to Start?</h2>
-    <p>Let’s plan your perfect Disney trip.</p>
-    <a href="#" class="button">Get in Touch</a>
+    <!-- FULL SERVICE -->
+    <div class="card" onclick="toggleCard(this)">
+      <h3>Full Concierge Service</h3>
+      <p class="price">£350</p>
+      <div class="card-content">
+        <p>The complete experience.</p>
+        <p>Includes planning, bookings, itinerary, and ongoing support.</p>
+        <p>Everything handled so you can just enjoy the magic.</p>
+      </div>
+    </div>
 
   </div>
 
-  <div class="footer">
-    © The Wishmaker’s Guide
-  </div>
+  <h2>Why Use Me?</h2>
+  <p><strong>Save time:</strong> No more endless research.</p>
+  <p><strong>Save stress:</strong> I simplify everything.</p>
+  <p><strong>Never miss a thing:</strong> Every detail covered.</p>
+
+  <h2 id="contact">Ready to Start?</h2>
+  <a href="#" class="button">Get in Touch</a>
+
+</div>
+
+<div class="footer">
+  © The Wishmaker’s Guide
+</div>
+
+<script>
+  function toggleCard(card) {
+    card.classList.toggle("active");
+  }
+</script>
 
 </body>
 </html>
