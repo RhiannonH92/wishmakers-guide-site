@@ -10,9 +10,15 @@
     <style>
         html { scroll-behavior: smooth; }
         
-        /* GLOBAL FONT RESET */
+        /* STRICT FONT RESET 
+           This forces the 'Inter' font on everything except headers.
+        */
         * {
-            font-family: 'Inter', sans-serif;
+            box-sizing: border-box;
+        }
+
+        body, p, div, span, li, ul, a, label, input, textarea, button {
+            font-family: 'Inter', sans-serif !important;
             -webkit-font-smoothing: antialiased;
         }
 
@@ -36,7 +42,7 @@
         }
 
         nav a {
-            margin-right: 30px;
+            margin-right: 25px;
             text-decoration: none;
             color: #555;
             font-weight: 500;
@@ -46,7 +52,7 @@
 
         nav a:hover { color: #6d5dfc; }
 
-        /* --- HEADINGS --- */
+        /* --- HEADINGS (The only things allowed to be Playfair) --- */
         h1, h2, h3, h4 {
             font-family: 'Playfair Display', serif !important;
             font-weight: 700;
@@ -70,7 +76,13 @@
             margin-bottom: 30px;
         }
 
-        /* --- TEXT STYLES --- */
+        /* --- LAYOUT --- */
+        .container {
+            max-width: 900px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
         p {
             font-size: 17px;
             line-height: 1.8;
@@ -78,25 +90,13 @@
             margin-bottom: 25px;
         }
 
-        .container {
-            max-width: 900px;
-            margin: 80px auto;
-            padding: 0 20px;
-        }
-
-        /* HERO SECTION */
         .hero {
-            animation: fadeIn 1.2s ease-out;
+            padding-top: 40px;
         }
 
         .hero p {
-            font-size: 19px; /* Slightly larger but same font family/weight */
+            font-size: 19px;
             color: #333;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
         }
 
         /* --- BUTTONS --- */
@@ -150,21 +150,6 @@
             gap: 20px;
         }
 
-        .card-title-area { flex: 1; }
-
-        .card h3 {
-            margin: 0 0 12px 0;
-            color: #6d5dfc;
-            font-size: 24px;
-        }
-
-        .brief-desc {
-            font-size: 15px;
-            color: #666;
-            margin: 0;
-            line-height: 1.6;
-        }
-
         .price-badge {
             background: #f3f0ff;
             color: #6d5dfc;
@@ -188,31 +173,28 @@
             padding-top: 25px;
         }
 
-        .card-content ul { padding-left: 20px; }
-        .card-content li { margin-bottom: 10px; color: #4a4a4a; }
+        .card-content li { margin-bottom: 10px; }
 
         .small-print {
             font-size: 13px;
             color: #888;
             font-style: italic;
             margin-top: 20px;
-            line-height: 1.5;
         }
 
-        /* --- HIGHLIGHT BOX & CENTER TEXT --- */
+        /* --- SECTIONS --- */
         .highlight {
             background: white;
             padding: 40px;
             border-radius: 20px;
             margin-top: 40px;
             box-shadow: 0 15px 40px rgba(0,0,0,0.04);
-            text-align: left;
         }
 
         .center-text {
             text-align: center;
             max-width: 800px;
-            margin: 100px auto;
+            margin: 80px auto;
         }
 
         /* --- CONTACT FORM --- */
@@ -222,29 +204,25 @@
             padding: 40px;
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.04);
-            margin: 30px auto 0 auto;
+            margin: 30px auto;
             max-width: 600px;
             border: 1px solid #f0f0f0;
         }
 
         .form-group { margin-bottom: 20px; }
-        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; font-size: 14px; color: #444; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; font-size: 14px; }
         .form-group input, .form-group textarea {
-            width: 100%; padding: 14px; border: 1px solid #ddd; border-radius: 10px; font-size: 16px; box-sizing: border-box; background-color: #fafafa; transition: border-color 0.3s;
+            width: 100%; padding: 14px; border: 1px solid #ddd; border-radius: 10px; font-size: 16px; background-color: #fafafa;
         }
-        .form-group input:focus, .form-group textarea:focus { outline: none; border-color: #6d5dfc; background-color: #fff; }
-        .submit-btn { width: 100%; display: block; }
+        .submit-btn { width: 100%; }
 
         .footer { text-align: center; padding: 60px 20px; color: #888; font-size: 14px; border-top: 1px solid #eee; }
 
         @media (max-width: 600px) {
             .card-header { flex-direction: column; }
             .price-badge { align-self: flex-start; margin-top: 15px; }
-            .container { margin: 40px auto; padding: 0 25px; }
-            nav { padding: 15px 20px; }
-            nav a { margin-right: 15px; font-size: 13px; }
-            h2 { font-size: 28px; }
-            .contact-form { padding: 25px; }
+            nav { padding: 15px 10px; text-align: center; }
+            nav a { margin-right: 10px; font-size: 12px; }
         }
     </style>
 </head>
@@ -255,6 +233,7 @@
   <a href="#">Home</a>
   <a href="#services">Services</a>
   <a href="#why">Why Me</a>
+  <a href="#about">About Me</a>
   <a href="#contact">Contact</a>
 </nav>
 
@@ -264,17 +243,11 @@
         <h1>The Wishmaker’s Guide ✨</h1>
         <p>Have you booked your ‘once in a lifetime’ trip to Walt Disney World in Florida but now feel totally overwhelmed trying to plan it? Where do you start?!</p>
         <p>You’ve spent so much money on your trip, do you really want to waste precious time wandering around aimlessly when you get there?</p>
-        <p><strong>If you don’t want to waste time or miss out... you need someone who knows the magic.</strong><br>
-        That’s where The Wishmaker’s Guide comes in.<br>
+        <p><strong>If you don’t want to waste time or miss out... you need someone who knows the magic.</strong></p>
+        <p>That’s where The Wishmaker’s Guide comes in.<br>
         I’ll help you plan your dream Disney trip - down to the smallest detail.</p>
         <a href="#services" class="button">Explore Services</a>
     </div>
-
-    <h2>Let Me Be Your Guide</h2>
-    <p>Disney World is HUGE, with hundreds of restaurants, rides and experiences.</p>
-    <p>Have you tried to google information yourself and been met with hundreds of articles to wade through?</p>
-    <p>Look no further! I LOVE planning Disney trips, and I would love to help you plan yours. Let me be your guide!</p>
-    <p>I offer several different services, suited to any need and budget - please see below for more details.</p>
 
     <h2 id="services">Services</h2>
 
@@ -282,12 +255,12 @@
         <div class="card-header">
             <div class="card-title-area">
                 <h3>40 mins Zoom</h3>
-                <p class="brief-desc">Ask me anything about your upcoming trip! Do you have any specific questions about transportation or need a restaurant recommendation?</p>
+                <p class="brief-desc">Ask me anything about your upcoming trip! Do you have specific questions about transportation or restaurants?</p>
             </div>
             <div class="price-badge">£50</div>
         </div>
         <div class="card-content">
-            <p>A 1-1 zoom call at a time that suits you, where you can ask me any pressing questions. Confused about the transportation system? Not sure how the dining plan works? Ask away!</p>
+            <p>A 1-1 zoom call at a time that suits you. Confused about the transportation system? Not sure how the dining plan works? Ask away! I'll follow up with an email containing all the tips we discussed.</p>
         </div>
     </div>
 
@@ -295,12 +268,12 @@
         <div class="card-header">
             <div class="card-title-area">
                 <h3>80 mins Zoom</h3>
-                <p class="brief-desc">A more in depth chat about your trip! I can provide recommendations, ideas to add a magical touch, and help with logistics.</p>
+                <p class="brief-desc">An in-depth chat about your trip. Perfect for first-timers or complex logistics.</p>
             </div>
             <div class="price-badge">£100</div>
         </div>
         <div class="card-content">
-            <p>An in-depth 1-1 zoom call. I’ll send a pre-call questionnaire so we can get right into the questions that matter most. Perfect for first-timers or complex plans!</p>
+            <p>An in-depth session. I’ll send a pre-call questionnaire so we can hit the ground running. I’ll help you plan your days and share tips for snagging those hard-to-get dining spots.</p>
         </div>
     </div>
 
@@ -308,12 +281,12 @@
         <div class="card-header">
             <div class="card-title-area">
                 <h3>Itinerary Planning Service</h3>
-                <p class="brief-desc">A personalised day-by-day itinerary tailored to your family’s interests and budget to maximize the magic.</p>
+                <p class="brief-desc">A personalised day-by-day itinerary tailored to your family's interests and budget.</p>
             </div>
             <div class="price-badge">£150</div>
         </div>
         <div class="card-content">
-            <p>I build your perfect Disney schedule day-by-day. It’s all tailored to your group, pace, budget, and wish list, delivered via an easy-to-use app.</p>
+            <p>I build your perfect Disney schedule. Day-by-day plans tailored to your pace, budget, and wish list, delivered via an easy-to-use offline app and PDF.</p>
         </div>
     </div>
 
@@ -321,13 +294,13 @@
         <div class="card-header">
             <div class="card-title-area">
                 <h3>Reservation Booking Assistance</h3>
-                <p class="brief-desc">No more rushing at dawn! I’ll handle booking your dining and experiences at the exact moment they open.</p>
+                <p class="brief-desc">I’ll handle the 60-day reservation window for you at the crack of dawn.</p>
             </div>
             <div class="price-badge">£40</div>
         </div>
         <div class="card-content">
-            <p>I have a proven strategy to snag those hard-to-get reservations. I only take one family per booking day to ensure total focus on your wishes.</p>
-            <p class="small-print">*Available for Disney World resort guests only. Access to My Disney Experience required.</p>
+            <p>I handle the stress of snagging character dining and sought-after meals. I focus on one family per day to ensure the best results.</p>
+            <p class="small-print">*Resort guests only. My Disney Experience account access required.</p>
         </div>
     </div>
 
@@ -335,35 +308,32 @@
         <div class="card-header">
             <div class="card-title-area">
                 <h3>Full Concierge Service</h3>
-                <p class="brief-desc">The ultimate stress-free experience. Personalised planning, booking, and logistics all wrapped into one.</p>
+                <p class="brief-desc">The ultimate package: Zoom calls, booking assistance, and full itinerary planning.</p>
             </div>
             <div class="price-badge">£350</div>
         </div>
         <div class="card-content">
             <h4>What’s included?</h4>
             <ul>
-                <li>80-minute planning Zoom.</li>
-                <li>All restaurant and experience reservations booked for you.</li>
-                <li>Full day-to-day itinerary in-app and PDF.</li>
-                <li>Two follow-up 40-minute calls before you fly.</li>
+                <li>80-minute deep-dive Zoom call.</li>
+                <li>Full reservation booking service.</li>
+                <li>Complete personalised itinerary (App & PDF).</li>
+                <li>Two follow-up 40-minute calls before you travel.</li>
                 <li>Priority email support.</li>
             </ul>
         </div>
     </div>
-</div>
 
-<div class="center-text">
     <h2 id="why">Why use a Disney trip planner?</h2>
-    
     <div class="highlight">
-        <p><strong>Save time!</strong> Instead of spending hours researching every little detail, I can give you clear, personalised guidance based on real Disney experience.</p>
-        <p><strong>Save the stress!</strong> There’s a lot to think about—parks, resorts, dining, extras... I’ll walk you through what actually matters for the type of trip YOU want.</p>
-        <p><strong>Never miss a thing!</strong> I’ll guide you step-by-step through the entire planning process so you always know what’s coming next.</p>
-        <p><strong>Insider knowledge!</strong> I share the tricks and little secrets that make a huge difference—the things you only learn from going again and again.</p>
+        <p><strong>Save time!</strong> Instead of spending hours researching, I give you clear, personalised guidance based on real experience.</p>
+        <p><strong>Save the stress!</strong> I walk you through the parks, resorts, and transportation so every choice feels easier.</p>
+        <p><strong>Never miss a thing!</strong> I’ll guide you step-by-step so you never turn up wishing you had booked something earlier.</p>
+        <p><strong>Insider knowledge!</strong> I share the timing strategies and secrets that make a huge difference.</p>
     </div>
 
-    <div class="card" id="about-card" style="margin-top: 40px;">
-        <h3>About Me</h3>
+    <h2 id="about">About Me</h2>
+    <div class="card">
         <p>I’m not a travel agent, so I’m not here to sell you a package or pressure you into booking your holiday through me.</p>
         <p>My only goal is to give you honest, helpful advice and the very best tips so you can get the most out of your Disney holiday.</p>
         <p>As an independent Disney trip planner, I combine years of experience with a genuine love and passion for the parks to help you make amazing memories, enjoy a stress-free trip, and experience the magic to the fullest.</p>
@@ -371,27 +341,27 @@
         <p><strong>Now, it’s my turn to help YOU do the same.</strong></p>
         <p>My mission is to help you create a truly magical Disney holiday—one that’s stress-free, packed with joy, and full of moments you’ll treasure for a lifetime.</p>
     </div>
-</div>
 
-<div class="center-text" id="contact">
-    <h2>Get in Touch</h2>
-    <p>Have questions or ready to start planning? Send me a message below!</p>
+    <div class="center-text" id="contact">
+        <h2>Get in Touch</h2>
+        <p>Have questions or ready to start planning? Send me a message below!</p>
+        <form action="https://formspree.io/f/xreoyplv" method="POST" class="contact-form">
+            <div class="form-group">
+                <label>Your Name</label>
+                <input type="text" name="name" required>
+            </div>
+            <div class="form-group">
+                <label>Your Email</label>
+                <input type="email" name="_replyto" required>
+            </div>
+            <div class="form-group">
+                <label>How can I help?</label>
+                <textarea name="message" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="button submit-btn">Send Message</button>
+        </form>
+    </div>
 
-    <form action="https://formspree.io/f/xreoyplv" method="POST" class="contact-form">
-        <div class="form-group">
-            <label>Your Name</label>
-            <input type="text" name="name" placeholder="Enter your name" required>
-        </div>
-        <div class="form-group">
-            <label>Your Email</label>
-            <input type="email" name="_replyto" placeholder="Enter your email address" required>
-        </div>
-        <div class="form-group">
-            <label>How can I help?</label>
-            <textarea name="message" rows="5" placeholder="Tell me a bit about your trip plans..." required></textarea>
-        </div>
-        <button type="submit" class="button submit-btn">Send Message</button>
-    </form>
 </div>
 
 <footer class="footer">
