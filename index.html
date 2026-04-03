@@ -19,7 +19,6 @@
             line-height: 1.6;
         }
 
-        /* Force all text elements to use Inter unless they are headers */
         p, div, span, li, ul, a, label, input, textarea {
             font-family: 'Inter', sans-serif;
         }
@@ -109,20 +108,24 @@
             box-shadow: 0 8px 25px rgba(109, 93, 252, 0.3);
         }
 
-        /* --- SERVICE CARDS --- */
+        /* --- CARDS --- */
         .card {
             background: white;
             border-radius: 20px;
             padding: 35px;
             margin-top: 25px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.04);
-            cursor: pointer;
-            transition: all 0.3s ease;
             border: 1px solid #f0f0f0;
             text-align: left;
         }
 
-        .card:hover {
+        /* Service Cards specific style */
+        .service-card {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover {
             transform: translateY(-5px);
             border-color: #6d5dfc;
             box-shadow: 0 15px 45px rgba(109, 93, 252, 0.1);
@@ -166,26 +169,16 @@
             transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .card.active .card-content {
+        .service-card.active .card-content {
             max-height: 2500px;
             margin-top: 30px;
             border-top: 1px solid #f0f0f0;
             padding-top: 25px;
         }
 
-        .card-content h4 {
-            font-size: 20px;
-            margin-top: 0;
-        }
-
-        .card-content ul {
-            padding-left: 20px;
-        }
-
-        .card-content li {
-            margin-bottom: 10px;
-            color: #4a4a4a;
-        }
+        .card-content h4 { font-size: 20px; margin-top: 0; }
+        .card-content ul { padding-left: 20px; }
+        .card-content li { margin-bottom: 10px; color: #4a4a4a; }
 
         .small-print {
             font-size: 13px;
@@ -205,15 +198,13 @@
             text-align: left;
         }
 
-        .highlight p { margin-bottom: 20px; }
-
         .center-text {
             text-align: center;
             max-width: 800px;
             margin: 100px auto;
         }
 
-        /* --- CONTACT FORM STYLE --- */
+        /* --- CONTACT FORM --- */
         .contact-form {
             text-align: left;
             background: white;
@@ -225,51 +216,16 @@
             border: 1px solid #f0f0f0;
         }
 
-        .form-group {
-            margin-bottom: 20px;
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; font-size: 14px; color: #444; }
+        .form-group input, .form-group textarea {
+            width: 100%; padding: 14px; border: 1px solid #ddd; border-radius: 10px; font-size: 16px; box-sizing: border-box; background-color: #fafafa; transition: border-color 0.3s;
         }
+        .form-group input:focus, .form-group textarea:focus { outline: none; border-color: #6d5dfc; background-color: #fff; }
+        .submit-btn { width: 100%; display: block; }
 
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            font-size: 14px;
-            color: #444;
-        }
+        .footer { text-align: center; padding: 60px 20px; color: #888; font-size: 14px; border-top: 1px solid #eee; }
 
-        .form-group input, 
-        .form-group textarea {
-            width: 100%;
-            padding: 14px;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            font-size: 16px;
-            box-sizing: border-box;
-            background-color: #fafafa;
-            transition: border-color 0.3s;
-        }
-
-        .form-group input:focus, 
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #6d5dfc;
-            background-color: #fff;
-        }
-
-        .submit-btn {
-            width: 100%;
-            display: block;
-        }
-
-        .footer {
-            text-align: center;
-            padding: 60px 20px;
-            color: #888;
-            font-size: 14px;
-            border-top: 1px solid #eee;
-        }
-
-        /* --- MOBILE --- */
         @media (max-width: 600px) {
             .card-header { flex-direction: column; }
             .price-badge { align-self: flex-start; margin-top: 15px; }
@@ -311,22 +267,21 @@
 
     <h2 id="services">Services</h2>
 
-    <div class="card" onclick="toggleCard(this)">
+    <div class="card service-card" onclick="toggleCard(this)">
         <div class="card-header">
             <div class="card-title-area">
                 <h3>40 mins Zoom</h3>
-                <p class="brief-desc">Ask me anything about your upcoming trip! Do you have any specific questions about the Disney transportation, park days or need a restaurant recommendation? I’m happy to help!</p>
+                <p class="brief-desc">Ask me anything about your upcoming trip! Do you have any specific questions about the Disney transportation, park days or need a restaurant recommendation?</p>
             </div>
             <div class="price-badge">£50</div>
         </div>
         <div class="card-content">
             <p>A 1-1 zoom call at a time that suits you, where you can ask me any pressing questions you may have about your upcoming trip. Confused about the transportation system? Not sure how the dining plan works? Need a quick-service or sit-down meal recommendation in a particular park? Ask away!</p>
-            <p>Or, are you looking to book a trip but need a quick overview on Disney World itself, or a specific Disney resort recommendation to consider? I’m happy to share my thoughts!</p>
-            <p>This quick, focused call gives you personalised answers and confidence before you go. You’ll receive a follow up email with all the tips and details we discuss.</p>
+            <p>You’ll also receive a follow up email with anything we discussed so you can refer back to it at any time.</p>
         </div>
     </div>
 
-    <div class="card" onclick="toggleCard(this)">
+    <div class="card service-card" onclick="toggleCard(this)">
         <div class="card-header">
             <div class="card-title-area">
                 <h3>80 mins Zoom</h3>
@@ -335,13 +290,12 @@
             <div class="price-badge">£100</div>
         </div>
         <div class="card-content">
-            <p>A 1-1 zoom in depth zoom call, at a time that suits you. I’ll send a quick pre-call questionnaire, so we can get right into the questions that matter to you on the call. This is the perfect choice if you have multiple questions, or if this is your first time to Disney World and you’re not sure how to start planning your Disney days.</p>
-            <p>I would love to share my insight, and help you plan the most magical trip! I’ll let you know key details such as when to book your dining reservations (and some top tips to snag those hard-to get reservations!).</p>
-            <p>Ask anything, I’m happy to help! You’ll receive a follow up email with all the tips and details we discuss.</p>
+            <p>A 1-1 zoom in depth zoom call, at a time that suits you. I’ll send a quick pre-call questionnaire, so we can get right into the questions that matter to you on the call.</p>
+            <p>I would love to share my insight, and help you plan the most magical trip! I’ll let you know key details such as when to book your dining reservations and some top tips.</p>
         </div>
     </div>
 
-    <div class="card" onclick="toggleCard(this)">
+    <div class="card service-card" onclick="toggleCard(this)">
         <div class="card-header">
             <div class="card-title-area">
                 <h3>Itinerary Planning Service</h3>
@@ -350,14 +304,11 @@
             <div class="price-badge">£150</div>
         </div>
         <div class="card-content">
-            <p>I work individually with each family based on their specific interests and budgets to truly squeeze every ounce of magic into their trip! Let me build your perfect Disney schedule for you— day by day. It’s all tailored to your group, pace, budget, and wish list.</p>
-            <p>Once you have booked any extra experiences or sit down restaurants, I can work an itinerary around these so you really maximise your days, with ride recommendations, quick service food suggestions and top tips.</p>
-            <p>Your itinerary will be available to you in an app, so it’s easy to access (offline) whilst you’re on holiday. There will also be a printable PDF version sent to you if you prefer.</p>
-            <p>If you want your dream Disney trip without spending countless hours researching or worrying about what’s best for your family, let me design a personalised itinerary that takes all the stress away.</p>
+            <p>I work individually with each family based on their specific interests and budgets. Let me build your perfect Disney schedule for you— day by day. It’s all tailored to your group, pace, budget, and wish list.</p>
         </div>
     </div>
 
-    <div class="card" onclick="toggleCard(this)">
+    <div class="card service-card" onclick="toggleCard(this)">
         <div class="card-header">
             <div class="card-title-area">
                 <h3>Reservation Booking Assistance</h3>
@@ -366,14 +317,12 @@
             <div class="price-badge">£40</div>
         </div>
         <div class="card-content">
-            <p>Already know which restaurants/experiences you’d like to book? Don’t fancy getting up at the crack of dawn to book them 60 days in advance? No problem! I can do this for you!</p>
-            <p>Maximise your chance of getting the most sought-after meals, character dining and extra experiences with minimal stress. Some of the reservations are so sought-after, you have to be online the minute the time slots open up, and they can disappear before your eyes!</p>
-            <p>I only take one family per reservation booking day, so I can solely focus on your wishes. I will ask you which restaurants you would like me to try for, and what dates/rough times and then I will do all the hard work for you!</p>
-            <p class="small-print">*the small print - this service is available for people staying at a Disney World resort only. Access to My Disney Experience account required. Party size and length of stay limitations apply.</p>
+            <p>I have a proven strategy that has worked amazingly for me, so let me take away this stress for you and snag those hard to get reservations. I only take one family per reservation booking day.</p>
+            <p class="small-print">*the small print - this service is available for people staying at a Disney World resort only. Access to My Disney Experience account required.</p>
         </div>
     </div>
 
-    <div class="card" onclick="toggleCard(this)">
+    <div class="card service-card" onclick="toggleCard(this)">
         <div class="card-header">
             <div class="card-title-area">
                 <h3>Full Concierge Service</h3>
@@ -384,11 +333,10 @@
         <div class="card-content">
             <h4>What’s included?</h4>
             <ul>
-                <li>An 80 minute Zoom call so I can learn all your wishes for your trip, must do’s and any special interests. This is also chance for you to ask any questions you may have about your upcoming trip.</li>
-                <li>I will provide you with suggestions of extras I think you might like to consider such as make-over experiences, character dining, fancy sit-down meals, all based on your family’s interests and preferences.</li>
-                <li>I will book your reservations for you when your booking date opens up. No waking up early to snag those must-do’s! (Available for off-site guests too).</li>
-                <li>A full day-to-day personalised itinerary for your family available to you offline on an app and as a printable PDF.</li>
-                <li>Up to two 40 minute Zoom calls before your trip with any follow up questions you may have.</li>
+                <li>An 80 minute Zoom call to learn all your wishes.</li>
+                <li>I will book your reservations for you when your booking date opens up.</li>
+                <li>A full day-to-day personalised itinerary offline on an app and as a printable PDF.</li>
+                <li>Up to two 40 minute Zoom calls before your trip.</li>
                 <li>Priority response to emails.</li>
             </ul>
         </div>
@@ -398,11 +346,22 @@
 
 <div class="center-text">
     <h2 id="why">Why use a Disney trip planner?</h2>
+    
     <div class="highlight">
-        <p><strong>Save time!</strong> Instead of spending hours researching every little detail, I can give you clear, personalised guidance based on real Disney experience. You get everything you need in a fraction of the time, so you can focus on looking forward to your holiday, not stressing over it.</p>
-        <p><strong>Save the stress!</strong> There’s a lot to think about - parks, resorts, dining, extras, transportation, timings… the list goes on. I’ll walk you through what actually matters for the type of trip YOU want, so every choice feels easier and more exciting.</p>
-        <p><strong>Never miss a thing!</strong> I’ll guide you step-by-step through the entire planning process so you always know what’s coming next. No last-minute surprises, no turning up to Disney wishing you had booked something earlier - just a smooth, well-prepared adventure.</p>
-        <p><strong>Get insider knowledge from a true Disney fan!</strong> I use my years of experience visiting Walt Disney World (and planning countless trips) to share the tricks, timing strategies, and little secrets that make a huge difference. These are the things you only learn from going again and again!</p>
+        <p><strong>Save time!</strong> Instead of spending hours researching every little detail, I can give you clear, personalised guidance based on real Disney experience.</p>
+        <p><strong>Save the stress!</strong> There’s a lot to think about—parks, resorts, dining, extras... I’ll walk you through what actually matters for the type of trip YOU want.</p>
+        <p><strong>Never miss a thing!</strong> I’ll guide you step-by-step through the entire planning process so you always know what’s coming next.</p>
+        <p><strong>Insider knowledge!</strong> I use my years of experience visiting Walt Disney World to share the tricks and little secrets that make a huge difference.</p>
+    </div>
+
+    <div class="card" id="about-card" style="margin-top: 40px;">
+        <h3>About Me</h3>
+        <p>My name is Rhiannon. I’m not a travel agent, so I’m not here to sell you a package or pressure you into booking your holiday through me.</p>
+        <p>My only goal is to give you honest, helpful advice and the very best tips so you can get the most out of your Disney holiday.</p>
+        <p>As an independent Disney trip planner, I combine years of experience with a genuine love and passion for the parks to help you make amazing memories, enjoy a stress-free trip, and experience the magic to the fullest.</p>
+        <p>I’ve been lucky enough to have incredible Disney trips myself—riding every must-do, snagging the reservations I wanted, meeting unforgettable characters and making memories I’ll never forget.</p>
+        <p><strong>Now, it’s my turn to help YOU do the same.</strong></p>
+        <p>My mission is to help you create a truly magical Disney holiday—one that’s stress-free, packed with joy, and full of moments you’ll treasure for a lifetime.</p>
     </div>
 </div>
 
