@@ -5,19 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Wishmaker’s Guide</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
 
     <style>
         html { scroll-behavior: smooth; }
         
         body {
             margin: 0;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Inter', sans-serif; /* Base font */
             background: linear-gradient(180deg, #faf9ff 0%, #f3f0ff 100%);
             color: #2a2a2a;
             overflow-x: hidden;
+            line-height: 1.6;
         }
 
+        /* --- NAVIGATION --- */
         nav {
             background: rgba(255,255,255,0.85);
             backdrop-filter: blur(10px);
@@ -33,77 +35,98 @@
             text-decoration: none;
             color: #555;
             font-weight: 500;
+            font-size: 15px;
             transition: color 0.3s;
         }
 
         nav a:hover { color: #6d5dfc; }
 
+        /* --- LAYOUT --- */
         .container {
             max-width: 900px;
             margin: 80px auto;
             padding: 0 20px;
         }
 
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif; /* Heading font */
+            font-weight: 700;
+            color: #2a2a2a;
+            margin-top: 0;
+        }
+
         h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(32px, 8vw, 48px);
+            font-size: clamp(36px, 8vw, 54px);
             color: #6d5dfc;
-            margin-bottom: 10px;
+            margin-bottom: 20px;
+            line-height: 1.1;
         }
 
         h2 {
-            margin-top: 70px;
-            font-size: 30px;
-            color: #444;
-            font-family: 'Playfair Display', serif;
+            margin-top: 80px;
+            font-size: 32px;
+            border-bottom: 2px solid #f0ecff;
+            display: inline-block;
+            padding-bottom: 5px;
+            margin-bottom: 30px;
         }
 
         p {
+            font-family: 'Inter', sans-serif;
+            font-size: 17px;
             line-height: 1.8;
-            color: #444;
+            color: #4a4a4a;
+            margin-bottom: 25px;
         }
 
         .hero p {
-            font-size: 18px;
+            font-size: 20px;
+            font-weight: 400;
         }
 
         .button {
             display: inline-block;
-            margin-top: 25px;
-            padding: 14px 22px;
+            margin-top: 15px;
+            padding: 16px 28px;
             background: linear-gradient(135deg, #6d5dfc, #9b8cff);
             color: white;
             text-decoration: none;
-            border-radius: 10px;
-            font-weight: 500;
-            transition: transform 0.2s;
+            border-radius: 12px;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(109, 93, 252, 0.2);
         }
 
-        .button:hover { transform: translateY(-2px); }
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(109, 93, 252, 0.3);
+        }
 
         .page-img {
             width: 100%;
             height: auto;
-            border-radius: 12px;
-            margin-top: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border-radius: 20px;
+            margin: 20px 0 40px 0;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.08);
         }
 
         /* --- SERVICE CARDS --- */
         .card {
             background: white;
-            border-radius: 16px;
-            padding: 30px;
+            border-radius: 20px;
+            padding: 35px;
             margin-top: 25px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.06);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.04);
             cursor: pointer;
-            transition: 0.3s;
-            border: 1px solid #eee;
+            transition: all 0.3s ease;
+            border: 1px solid #f0f0f0;
         }
 
         .card:hover {
             transform: translateY(-5px);
             border-color: #6d5dfc;
+            box-shadow: 0 15px 45px rgba(109, 93, 252, 0.1);
         }
 
         .card-header {
@@ -113,86 +136,93 @@
             gap: 20px;
         }
 
-        .card-title-area {
-            flex: 1;
-        }
+        .card-title-area { flex: 1; }
 
         .card h3 {
-            margin: 0 0 10px 0;
+            margin: 0 0 12px 0;
             color: #6d5dfc;
-            font-size: 22px;
+            font-size: 24px;
         }
 
         .brief-desc {
+            font-family: 'Inter', sans-serif;
             font-size: 15px;
             color: #666;
             margin: 0;
-            line-height: 1.5;
+            line-height: 1.6;
         }
 
         .price-badge {
+            font-family: 'Inter', sans-serif;
             background: #f3f0ff;
             color: #6d5dfc;
-            padding: 8px 15px;
-            border-radius: 8px;
+            padding: 10px 18px;
+            border-radius: 10px;
             font-weight: 600;
+            font-size: 16px;
             white-space: nowrap;
         }
 
         .card-content {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.5s ease;
+            transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .card.active .card-content {
-            max-height: 2000px; /* Large enough for full text */
-            margin-top: 25px;
-            border-top: 1px solid #eee;
-            padding-top: 20px;
+            max-height: 2500px;
+            margin-top: 30px;
+            border-top: 1px solid #f0f0f0;
+            padding-top: 25px;
         }
 
         .card-content h4 {
-            color: #444;
-            margin-bottom: 10px;
+            font-size: 20px;
+            margin-top: 0;
         }
 
         .small-print {
             font-size: 13px;
             color: #888;
             font-style: italic;
-            margin-top: 15px;
+            margin-top: 20px;
+            line-height: 1.5;
         }
 
-        /* --- REST OF PAGE --- */
+        /* --- SECTIONS --- */
         .highlight {
             background: white;
-            padding: 30px;
-            border-radius: 14px;
-            margin-top: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            padding: 40px;
+            border-radius: 20px;
+            margin-top: 40px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.04);
             text-align: left;
         }
 
+        .highlight p { margin-bottom: 20px; }
+
         .center-text {
             text-align: center;
-            max-width: 700px;
-            margin: 60px auto;
+            max-width: 800px;
+            margin: 100px auto;
         }
 
         .footer {
             text-align: center;
-            padding: 50px;
+            padding: 60px 20px;
             color: #888;
             font-size: 14px;
+            border-top: 1px solid #eee;
         }
 
+        /* --- MOBILE --- */
         @media (max-width: 600px) {
             .card-header { flex-direction: column; }
-            .price-badge { align-self: flex-start; margin-top: 10px; }
-            h1 { font-size: 34px; }
+            .price-badge { align-self: flex-start; margin-top: 15px; }
+            .container { margin: 40px auto; padding: 0 25px; }
             nav { padding: 15px 20px; }
-            nav a { margin-right: 15px; font-size: 14px; }
+            nav a { margin-right: 15px; font-size: 13px; }
+            h2 { font-size: 28px; }
         }
     </style>
 </head>
@@ -219,7 +249,6 @@
     </div>
 
     <h2>Let Me Be Your Guide</h2>
-    <img src="Epcot-and-fountain.jpg" alt="Epcot and fountain" class="page-img">
     <p>Disney World is HUGE, with hundreds of restaurants, rides and experiences.</p>
     <p>Have you tried to google information yourself and been met with hundreds of articles to wade through?</p>
     <p>Look no further! I LOVE planning Disney trips, and I would love to help you plan yours. Let me be your guide!</p>
@@ -310,8 +339,6 @@
         </div>
     </div>
 
-    <img src="Animal-Kingdom.jpg" alt="Animal Kingdom" class="page-img">
-
 </div>
 
 <div class="center-text">
@@ -336,9 +363,9 @@
     <a href="mailto:your@email.com" class="button">Contact Me</a>
 </div>
 
-<div class="footer">
+<footer class="footer">
     © The Wishmaker’s Guide
-</div>
+</footer>
 
 <script>
 function toggleCard(card) {
