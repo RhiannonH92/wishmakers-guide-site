@@ -1,131 +1,144 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>The Wishmaker’s Guide</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Wishmaker’s Guide</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
 
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Inter', sans-serif;
-      background: linear-gradient(180deg, #faf9ff 0%, #f3f0ff 100%);
-      color: #2a2a2a;
-    }
+    <style>
+        html { scroll-behavior: smooth; }
+        
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(180deg, #faf9ff 0%, #f3f0ff 100%);
+            color: #2a2a2a;
+        }
 
-    nav {
-      background: rgba(255,255,255,0.85);
-      backdrop-filter: blur(10px);
-      padding: 18px 40px;
-      position: sticky;
-      top: 0;
-      border-bottom: 1px solid #eee;
-    }
+        nav {
+            background: rgba(255,255,255,0.85);
+            backdrop-filter: blur(10px);
+            padding: 18px 40px;
+            position: sticky;
+            top: 0;
+            border-bottom: 1px solid #eee;
+            z-index: 1000;
+        }
 
-    nav a {
-      margin-right: 30px;
-      text-decoration: none;
-      color: #555;
-      font-weight: 500;
-    }
+        nav a {
+            margin-right: 30px;
+            text-decoration: none;
+            color: #555;
+            font-weight: 500;
+        }
 
-    .container {
-      max-width: 900px;
-      margin: 80px auto;
-      padding: 0 20px;
-    }
+        .container {
+            max-width: 900px;
+            margin: 80px auto;
+            padding: 0 20px;
+        }
 
-    h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 48px;
-      color: #6d5dfc;
-      margin-bottom: 10px;
-    }
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            color: #6d5dfc;
+            margin-bottom: 10px;
+        }
 
-    h2 {
-      margin-top: 70px;
-      font-size: 30px;
-      color: #444;
-    }
+        h2 {
+            margin-top: 70px;
+            font-size: 30px;
+            color: #444;
+        }
 
-    p {
-      line-height: 1.8;
-      color: #444;
-    }
+        p {
+            line-height: 1.8;
+            color: #444;
+        }
 
-    .hero p {
-      font-size: 18px;
-    }
+        .hero p {
+            font-size: 18px;
+        }
 
-    .button {
-      display: inline-block;
-      margin-top: 25px;
-      padding: 14px 22px;
-      background: linear-gradient(135deg, #6d5dfc, #9b8cff);
-      color: white;
-      text-decoration: none;
-      border-radius: 10px;
-      font-weight: 500;
-    }
+        .button {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 14px 22px;
+            background: linear-gradient(135deg, #6d5dfc, #9b8cff);
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 500;
+        }
 
-    .card {
-      background: white;
-      border-radius: 16px;
-      padding: 30px;
-      margin-top: 25px;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.06);
-      cursor: pointer;
-      transition: 0.3s;
-      border: 1px solid #eee;
-    }
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            margin-top: 25px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.06);
+            cursor: pointer;
+            transition: 0.3s;
+            border: 1px solid #eee;
+        }
 
-    .card:hover {
-      transform: translateY(-5px);
-    }
+        .card:hover {
+            transform: translateY(-5px);
+        }
 
-    .card h3 {
-      margin: 0;
-      color: #6d5dfc;
-      font-size: 22px;
-    }
+        .card h3 {
+            margin: 0;
+            color: #6d5dfc;
+            font-size: 22px;
+        }
 
-    .price {
-      margin-top: 8px;
-      font-weight: 600;
-      color: #888;
-    }
+        .price {
+            margin-top: 8px;
+            font-weight: 600;
+            color: #888;
+        }
 
-    .card-content {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.5s ease;
-      margin-top: 20px;
-    }
+        .card-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
 
-    .card.active .card-content {
-      max-height: 4000px;
-    }
+        .card.active .card-content {
+            max-height: 2000px;
+            margin-top: 20px;
+        }
 
-    .highlight {
-      background: white;
-      padding: 30px;
-      border-radius: 14px;
-      margin-top: 30px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-    }
+        .highlight {
+            background: white;
+            padding: 30px;
+            border-radius: 14px;
+            margin-top: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            text-align: left;
+        }
 
-    .center-text {
-      text-align: center;
-      max-width: 700px;
-      margin: 60px auto;
-    }
+        .center-text {
+            text-align: center;
+            max-width: 700px;
+            margin: 60px auto;
+        }
 
-    .footer {
-      text-align: center;
-      padding: 50px;
-      color: #888;
-    }
-  </style>
+        .footer {
+            text-align: center;
+            padding: 50px;
+            color: #888;
+        }
+
+        /* Mobile Fix */
+        @media (max-width: 600px) {
+            h1 { font-size: 34px; }
+            nav { padding: 15px 20px; }
+            nav a { margin-right: 15px; font-size: 14px; }
+        }
+    </style>
 </head>
 
 <body>
@@ -139,87 +152,93 @@
 
 <div class="container">
 
-<div class="hero">
-<h1>The Wishmaker’s Guide ✨</h1>
+    <div class="hero">
+        <h1>The Wishmaker’s Guide ✨</h1>
 
-<p>Have you booked your ‘once in a lifetime’ trip to Walt Disney World in Florida but now feel totally overwhelmed trying to plan it? Where do you start?!</p>
+        <p>Have you booked your ‘once in a lifetime’ trip to Walt Disney World in Florida but now feel totally overwhelmed trying to plan it? Where do you start?!</p>
 
-<p>You’ve spent so much money on your trip, do you really want to waste precious time wandering around aimlessly when you get there?</p>
+        <p>You’ve spent so much money on your trip, do you really want to waste precious time wandering around aimlessly when you get there?</p>
 
-<p><strong>If you don’t want to waste time or miss out... you need someone who knows the magic.</strong><br>
-That’s where The Wishmaker’s Guide comes in.<br>
-I’ll help you plan your dream Disney trip - down to the smallest detail.</p>
+        <p><strong>If you don’t want to waste time or miss out... you need someone who knows the magic.</strong><br>
+        That’s where The Wishmaker’s Guide comes in.<br>
+        I’ll help you plan your dream Disney trip - down to the smallest detail.</p>
 
-<a href="#services" class="button">Explore Services</a>
-</div>
+        <a href="#services" class="button">Explore Services</a>
+    </div>
 
-<h2>Let Me Be Your Guide</h2>
+    <h2>Let Me Be Your Guide</h2>
 
-<img src="epcot and fountain.jpg" style="width:100%; border-radius:12px; margin-top:20px;">
+    <img src="epcot and fountain.jpg" alt="Epcot" style="width:100%; border-radius:12px; margin-top:20px;">
 
-<p>Disney World is HUGE, with hundreds of restaurants, rides and experiences.</p>
+    <p>Disney World is HUGE, with hundreds of restaurants, rides and experiences.</p>
 
-<p>Have you tried to google information yourself and been met with hundreds of articles to wade through?</p>
+    <p>Have you tried to google information yourself and been met with hundreds of articles to wade through?</p>
 
-<p>Look no further! I LOVE planning Disney trips, and I would love to help you plan yours. Let me be your guide!</p>
+    <p>Look no further! I LOVE planning Disney trips, and I would love to help you plan yours. Let me be your guide!</p>
 
-<p>I offer several different services, suited to any need and budget - please see below for more details.</p>
+    <p>I offer several different services, suited to any need and budget - please see below for more details.</p>
 
-<h2 id="services">Services</h2>
+    <h2 id="services">Services</h2>
 
-<!-- (your service cards stay EXACTLY as they were — no changes needed here) -->
+    <div class="card" onclick="toggleCard(this)">
+        <h3>Service Name Example</h3>
+        <div class="price">Price Details Here</div>
+        <div class="card-content">
+            <p>Your specific service description goes here.</p>
+        </div>
+    </div>
 
-<img src="animal kingdom.jpg" style="width:100%; border-radius:12px; margin-top:20px;">
+    <img src="animal kingdom.jpg" alt="Animal Kingdom" style="width:100%; border-radius:12px; margin-top:20px;">
 
-</div>
-
-<div class="center-text">
-<h2 id="why">Why use a Disney trip planner?</h2>
-
-<div class="highlight">
-<p><strong>Save time!</strong> Instead of spending hours researching every little detail, I can give you clear, personalised guidance based on real Disney experience. 
-You get everything you need in a fraction of the time, so you can focus on looking forward to your holiday, not stressing over it.</p>
-
-<p><strong>Save the stress!</strong> There’s a lot to think about - parks, resorts, dining, extras, transportation, timings… the list goes on. 
-I’ll walk you through what actually matters for the type of trip YOU want, so every choice feels easier and more exciting.</p>
-
-<p><strong>Never miss a thing!</strong> I’ll guide you step-by-step through the entire planning process so you always know what’s coming next. 
-No last-minute surprises, no turning up to Disney wishing you had booked something earlier - just a smooth, well-prepared adventure.</p>
-
-<p><strong>Get insider knowledge from a true Disney fan!</strong> I use my years of experience visiting Walt Disney World (and planning countless trips) 
-to share the tricks, timing strategies, and little secrets that make a huge difference.
-These are the things you only learn from going again and again!</p>
-</div>
 </div>
 
 <div class="center-text">
-<h2>About Me</h2>
+    <h2 id="why">Why use a Disney trip planner?</h2>
 
-<p>I’m not a travel agent, so I’m not here to sell you a package or pressure you into booking your holiday through me.</p>
+    <div class="highlight">
+        <p><strong>Save time!</strong> Instead of spending hours researching every little detail, I can give you clear, personalised guidance based on real Disney experience. 
+        You get everything you need in a fraction of the time, so you can focus on looking forward to your holiday, not stressing over it.</p>
 
-<p>My only goal is to give you honest, helpful advice and the very best tips so you can get the most out of your Disney holiday.</p>
+        <p><strong>Save the stress!</strong> There’s a lot to think about - parks, resorts, dining, extras, transportation, timings… the list goes on. 
+        I’ll walk you through what actually matters for the type of trip YOU want, so every choice feels easier and more exciting.</p>
 
-<p>As an independent Disney trip planner, I combine years of experience with a genuine love and passion for the parks to help you make amazing memories,
-enjoy a stress-free trip, and experience the magic to the fullest.</p>
+        <p><strong>Never miss a thing!</strong> I’ll guide you step-by-step through the entire planning process so you always know what’s coming next. 
+        No last-minute surprises, no turning up to Disney wishing you had booked something earlier - just a smooth, well-prepared adventure.</p>
 
-<p>I’ve been lucky enough to have incredible Disney trips myself - riding every must-do attraction, snagging the reservations I wanted, meeting unforgettable characters
-and making memories I’ll never forget.</p>
+        <p><strong>Get insider knowledge from a true Disney fan!</strong> I use my years of experience visiting Walt Disney World (and planning countless trips) 
+        to share the tricks, timing strategies, and little secrets that make a huge difference.
+        These are the things you only learn from going again and again!</p>
+    </div>
+</div>
 
-<p><strong>Now, it’s my turn to help YOU do the same.</strong></p>
+<div class="center-text">
+    <h2>About Me</h2>
 
-<p>My mission is to help you create a truly magical Disney holiday - one that’s stress-free, packed with joy, and full of moments you’ll treasure for a lifetime.</p>
+    <p>I’m not a travel agent, so I’m not here to sell you a package or pressure you into booking your holiday through me.</p>
 
-<h2 id="contact">Get in Touch</h2>
-<a href="#" class="button">Contact Me</a>
+    <p>My only goal is to give you honest, helpful advice and the very best tips so you can get the most out of your Disney holiday.</p>
+
+    <p>As an independent Disney trip planner, I combine years of experience with a genuine love and passion for the parks to help you make amazing memories,
+    enjoy a stress-free trip, and experience the magic to the fullest.</p>
+
+    <p>I’ve been lucky enough to have incredible Disney trips myself - riding every must-do attraction, snagging the reservations I wanted, meeting unforgettable characters
+    and making memories I’ll never forget.</p>
+
+    <p><strong>Now, it’s my turn to help YOU do the same.</strong></p>
+
+    <p>My mission is to help you create a truly magical Disney holiday - one that’s stress-free, packed with joy, and full of moments you’ll treasure for a lifetime.</p>
+
+    <h2 id="contact">Get in Touch</h2>
+    <a href="#" class="button">Contact Me</a>
 </div>
 
 <div class="footer">
-© The Wishmaker’s Guide
+    © The Wishmaker’s Guide
 </div>
 
 <script>
 function toggleCard(card) {
-  card.classList.toggle("active");
+    card.classList.toggle("active");
 }
 </script>
 
