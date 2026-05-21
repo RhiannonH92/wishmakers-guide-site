@@ -449,6 +449,132 @@ body[data-mood="plum"] {
   .footer-grid { grid-template-columns: 1fr; }
   .benefits-grid { grid-template-columns: 1fr; }
 }
+
+/* ============================================================
+   Mobile overrides — desktop layout unchanged above ~720px
+   ------------------------------------------------------------
+   The page uses heavy inline style={{ }} on React components,
+   so the only reliable way to override layout/sizing on small
+   screens without rewriting the components is to use !important
+   inside scoped media queries. Specificity here is intentional.
+   ============================================================ */
+@media (max-width: 720px) {
+
+  /* -------- Containers & sections -------- */
+  .container { padding-left: 20px !important; padding-right: 20px !important; }
+  .section { padding: 56px 0 !important; }
+
+  /* -------- Universal heading scale-down -------- */
+  /* The h2 = 54px set inline on every section is the single biggest
+     mobile problem. Knock it down hard. */
+  section h2 { font-size: 38px !important; line-height: 1.1 !important; }
+
+  /* -------- Nav -------- */
+  header { padding: 14px 20px !important; }
+  header > a[href="#contact"] {
+    padding: 8px 14px !important;
+    font-size: 9px !important;
+    letter-spacing: 0.18em !important;
+  }
+
+  /* -------- Hero (photo variant) -------- */
+  #top { min-height: auto !important; padding-top: 64px !important; }
+  /* Inner container override — the hero uses paddingTop: 200, paddingBottom: 120 */
+  #top > .container { padding-top: 110px !important; padding-bottom: 70px !important; }
+  .hero-display { font-size: 56px !important; }
+  /* Hero aside is "position: static" below 880, so just tighten spacing */
+  .hero-aside { margin-top: 28px !important; }
+  .hero-aside p { font-size: 16px !important; }
+  /* Hero type variant */
+  #top h1 { font-size: 54px !important; }
+
+  /* -------- Eyebrow ornament -------- */
+  .eyebrow-ornament { font-size: 10px !important; letter-spacing: 0.2em !important; gap: 10px !important; }
+  .eyebrow-ornament .rule { width: 20px !important; }
+
+  /* -------- Buttons -------- */
+  .btn { padding: 12px 18px !important; font-size: 10px !important; letter-spacing: 0.16em !important; }
+  .btn--soft-pill { padding: 14px 22px !important; }
+
+  /* -------- Services intro lead -------- */
+  #services .container > p,
+  #why-me .container > p,
+  #faqs .container > p { font-size: 15px !important; }
+
+  /* -------- Service cards -------- */
+  .service-card { padding: 22px 20px !important; min-height: 0 !important; }
+  .service-card h4 { font-size: 26px !important; }
+  .service-card p { font-size: 14.5px !important; }
+
+  /* -------- Benefits grid -------- */
+  .benefits-grid { margin-top: 40px !important; gap: 32px !important; }
+  .benefits-grid h4 { font-size: 22px !important; }
+
+  /* -------- About -------- */
+  .about-grid { gap: 32px !important; }
+  #about .about-grid > div:first-child { padding-top: 0 !important; padding-left: 0 !important; }
+  #about .about-grid > div:last-child > div p { font-size: 16px !important; }
+
+  /* -------- Lead magnet -------- */
+  #guide { padding: 72px 0 !important; }
+  #guide > .container > div { gap: 56px !important; }
+  /* Bullet list — force single column */
+  #guide ul { grid-template-columns: 1fr !important; max-width: none !important; gap: 12px !important; }
+  /* The decorative PDF tile is absolutely positioned at top:-36 right:-8 width:220 height:280
+     and overlaps the form badly on narrow screens. Shrink and reposition. */
+  #guide form { padding: 28px 22px 24px !important; }
+  #guide [style*="rotate(4deg)"] {
+    width: 150px !important;
+    height: 190px !important;
+    top: -28px !important;
+    right: -4px !important;
+    padding: 16px !important;
+  }
+  #guide [style*="rotate(4deg)"] h4 { font-size: 16px !important; }
+  #guide [style*="rotate(4deg)"] span { font-size: 9px !important; }
+  /* Lead magnet form button */
+  #guide form button.btn { padding: 14px 18px !important; }
+
+  /* -------- FAQ -------- */
+  #faqs .container > div { margin-top: 40px !important; }
+  /* FAQ question button — tighten right padding so + sign isn't squished */
+  #faqs button > span:first-child { font-size: 15.5px !important; padding-right: 16px !important; }
+  /* FAQ answer — kill the 60px right padding */
+  #faqs [style*="paddingRight: 60"],
+  #faqs div[style*="padding-right: 60"] { padding-right: 0 !important; font-size: 15px !important; }
+  /* Cover both — answers via the open panel */
+  #faqs > div div > div[style*="paddingBottom"] { padding-right: 0 !important; }
+
+  /* -------- Contact -------- */
+  .contact-grid { gap: 40px !important; }
+  /* Contact form padding */
+  #contact form { padding: 28px 22px 26px !important; gap: 20px !important; }
+  /* The "Drop me a line" cursive label crashes into the form on small widths */
+  #contact form > span[style*="absolute"] { display: none !important; }
+  /* Contact dl — let value column wrap */
+  #contact dl { margin-top: 32px !important; column-gap: 20px !important; }
+
+  /* -------- Footer -------- */
+  footer { padding-top: 56px !important; padding-bottom: 24px !important; }
+  .footer-grid { gap: 36px !important; }
+  /* Bottom copyright row — stack vertically on mobile, no awkward 3-up wrap */
+  footer > .container > div:last-child {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 10px !important;
+    text-align: left !important;
+  }
+}
+
+/* Very small phones (≤380px) — squeeze a bit more */
+@media (max-width: 380px) {
+  .container { padding-left: 16px !important; padding-right: 16px !important; }
+  section h2 { font-size: 34px !important; }
+  .hero-display { font-size: 48px !important; }
+  #top h1 { font-size: 46px !important; }
+  /* Hide the secondary "Get in touch" button at very narrow widths — logo only */
+  header > a[href="#contact"] { display: none !important; }
+}
 </style>
 </head>
 <body>
