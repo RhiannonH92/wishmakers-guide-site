@@ -436,7 +436,9 @@ body[data-mood="plum"] {
   .benefits-grid { grid-template-columns: repeat(2, 1fr); gap: 40px 32px; }
 }
 @media (max-width: 880px) {
-  .nav-links { display: none; }
+  /* The React component sets `style={{ display: "flex" }}` inline, which
+     beats normal CSS specificity. !important is required to override it. */
+  .nav-links { display: none !important; }
   .section { padding: var(--space-8) 0; }
   .about-grid, .contact-grid, .lead-grid { grid-template-columns: 1fr; gap: 48px; }
   .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
