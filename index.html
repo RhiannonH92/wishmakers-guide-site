@@ -421,6 +421,69 @@ body[data-mood="plum"] {
 /* Lead-magnet grid */
 .lead-grid { gap: 80px; }
 
+/* Gallery */
+.gallery-section { background: var(--cream-50); }
+.gallery-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 36px;
+  margin-top: 56px;
+}
+.gallery-figure { margin: 0; display: flex; flex-direction: column; align-items: center; }
+/* Subtle scrapbook tilts — each photo a touch different */
+.gallery-figure:nth-child(1) { transform: rotate(-1.2deg); }
+.gallery-figure:nth-child(2) { transform: rotate(0.6deg); margin-top: 18px; }
+.gallery-figure:nth-child(3) { transform: rotate(-0.5deg); }
+.gallery-frame {
+  background: var(--cream-50);
+  border: 1px solid var(--cream-300);
+  padding: 10px;
+  box-shadow: var(--shadow-2);
+  width: 100%;
+  aspect-ratio: 3/4;
+  overflow: hidden;
+  transition: transform var(--dur-3) var(--ease-soft), box-shadow var(--dur-3) var(--ease-soft);
+}
+.gallery-figure:hover .gallery-frame {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-3);
+}
+.gallery-frame img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  background: var(--cream-200);
+  /* Style alt text when image fails to load (until user adds photos) */
+  font-family: var(--font-ui);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  color: var(--ink-500);
+  text-align: center;
+}
+.contact-photo img { background: var(--cream-200); }
+.gallery-figure figcaption {
+  margin-top: 18px;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 17px;
+  color: var(--gold-600);
+}
+
+/* Contact photo (small, single, above the dl) */
+.contact-photo {
+  width: 200px;
+  aspect-ratio: 4/5;
+  margin: 32px 0 0;
+  background: var(--cream-50);
+  border: 1px solid var(--cream-300);
+  padding: 8px;
+  box-shadow: var(--shadow-2);
+  transform: rotate(-1.5deg);
+}
+.contact-photo img {
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+}
+
 /* Footer */
 .footer-grid {
   display: grid; grid-template-columns: 1.6fr 1fr 1.3fr 1fr; gap: 48px;
@@ -445,6 +508,8 @@ body[data-mood="plum"] {
   .services-grid--top, .services-grid--bottom { grid-template-columns: 1fr; }
   .hero-aside { position: static; max-width: none; margin-top: 36px; }
   .hero-scroll { display: none; }
+  /* Gallery → smaller gap at tablet width */
+  .gallery-grid { gap: 28px; }
 }
 @media (max-width: 560px) {
   .container { padding-left: 24px; padding-right: 24px; }
@@ -547,6 +612,21 @@ body[data-mood="plum"] {
   /* Cover both — answers via the open panel */
   #faqs > div div > div[style*="paddingBottom"] { padding-right: 0 !important; }
 
+  /* -------- Gallery -------- */
+  .gallery-grid {
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
+    margin-top: 36px !important;
+    max-width: 320px;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+  /* Remove tilts on mobile — they look awkward in a single column */
+  .gallery-figure { transform: none !important; margin-top: 0 !important; }
+  .gallery-figure figcaption { font-size: 16px !important; margin-top: 14px !important; }
+  /* Gallery section heading */
+  .gallery-section h3 { font-size: 30px !important; }
+
   /* -------- Contact -------- */
   .contact-grid { gap: 40px !important; }
   /* Contact form padding */
@@ -577,6 +657,63 @@ body[data-mood="plum"] {
   /* Hide the secondary "Get in touch" button at very narrow widths — logo only */
   header > a[href="#contact"] { display: none !important; }
 }
+
+/* ============================================================
+   Body text size bump — desktop AND mobile
+   ------------------------------------------------------------
+   The site uses Cormorant Garamond as the body face, a display
+   serif with a small x-height that reads smaller than its
+   nominal px size suggests. Bumping body copy 17→19, 19→21,
+   15/14.5→16. Headings, eyebrows, prices and meta untouched.
+   Attribute selectors target inline style="" because the
+   components inline their typography. Both spaced and
+   unspaced forms covered ("font-size: 17px" / "font-size:17px")
+   since React's exact rendering varies.
+   ============================================================ */
+
+/* Body copy at 17px — bump to 19px. The --font-body filter avoids
+   accidentally bumping display-font headings that happen to be 17px. */
+[style*="font-family:var(--font-body)"][style*="font-size:17px"],
+[style*="font-family: var(--font-body)"][style*="font-size: 17px"],
+[style*="font-family:var(--font-body)"][style*="font-size: 17px"],
+[style*="font-family: var(--font-body)"][style*="font-size:17px"] {
+  font-size: 19px !important;
+}
+
+/* Lead paragraph at 19px (typography hero variant) — bump to 21px */
+[style*="font-family:var(--font-body)"][style*="font-size:19px"],
+[style*="font-family: var(--font-body)"][style*="font-size: 19px"],
+[style*="font-family:var(--font-body)"][style*="font-size: 19px"],
+[style*="font-family: var(--font-body)"][style*="font-size:19px"] {
+  font-size: 21px !important;
+}
+
+/* Card / secondary body — 15px → 16.5px */
+[style*="font-family:var(--font-body)"][style*="font-size:15px"],
+[style*="font-family: var(--font-body)"][style*="font-size: 15px"],
+[style*="font-family:var(--font-body)"][style*="font-size: 15px"],
+[style*="font-family: var(--font-body)"][style*="font-size:15px"] {
+  font-size: 16.5px !important;
+}
+
+/* 14.5px → 16px */
+[style*="font-family:var(--font-body)"][style*="font-size:14.5px"],
+[style*="font-family: var(--font-body)"][style*="font-size: 14.5px"],
+[style*="font-family:var(--font-body)"][style*="font-size: 14.5px"],
+[style*="font-family: var(--font-body)"][style*="font-size:14.5px"] {
+  font-size: 16px !important;
+}
+
+/* FAQ question (17px, body font) — covered by the 17px rule above */
+/* FAQ answer (15.5px) — bump to 17px */
+[style*="font-family:var(--font-body)"][style*="font-size:15.5px"],
+[style*="font-family: var(--font-body)"][style*="font-size: 15.5px"] {
+  font-size: 17px !important;
+}
+
+/* Contact dl values (15px) — covered by the 15px rule above */
+/* Lead-magnet bullets and footer copy — covered above */
+
 </style>
 </head>
 <body>
@@ -1814,6 +1951,80 @@ Object.assign(window, { WhyPlanner });
 
 
 /* ============================================================
+   GALLERY — personal trip photos
+   ------------------------------------------------------------
+   PHOTO PLACEHOLDERS — replace the three src paths below with
+   your own trip photos. Put files in a /photos folder in the
+   repo root (or anywhere — just update the paths to match).
+
+   Recommended subjects:
+     1. A wide park scene (castle, fireworks, Main Street)
+     2. A candid of YOU enjoying the park
+     3. A food / restaurant / detail shot (character meet,
+        dining, a pretty corner of a resort)
+
+   Recommended dimensions: 800-1200px on the long edge, JPG.
+   The 3:4 aspect-ratio frame will crop to that shape, so
+   pick photos where the subject is well-centred.
+   ============================================================ */
+
+const GALLERY_PHOTOS = [
+  {
+    src: "./photos/trip-1.jpg",
+    alt: "REPLACE: describe the photo, e.g. 'Cinderella Castle at golden hour'",
+    caption: "Cinderella Castle, golden hour",
+  },
+  {
+    src: "./photos/trip-2.jpg",
+    alt: "REPLACE: describe the photo, e.g. 'Me on Main Street, EPCOT'",
+    caption: "A favourite afternoon, EPCOT",
+  },
+  {
+    src: "./photos/trip-3.jpg",
+    alt: "REPLACE: describe the photo, e.g. 'Breakfast at Be Our Guest'",
+    caption: "Breakfast at Be Our Guest",
+  },
+];
+
+function Gallery() {
+  return (
+    <section className="section section--tight gallery-section">
+      <div className="container" style={{ textAlign: "center" }}>
+        <Eyebrow withStars>From my trips</Eyebrow>
+        <h3 style={{
+          fontFamily: "var(--font-display)", fontSize: 36, fontWeight: 500,
+          color: "var(--plum-900)", margin: "20px 0 12px", lineHeight: 1.15,
+        }}>
+          A few <Gold>memories</Gold> of my own
+        </h3>
+        <p style={{
+          fontFamily: "var(--font-body)", fontStyle: "italic",
+          fontSize: 17, color: "var(--ink-500)",
+          maxWidth: 520, margin: "0 auto",
+        }}>
+          The reason I love what I do — and why I'll help you build a trip you'll
+          remember just as fondly.
+        </p>
+
+        <div className="gallery-grid">
+          {GALLERY_PHOTOS.map((p, i) => (
+            <figure key={i} className="gallery-figure">
+              <div className="gallery-frame">
+                <img src={p.src} alt={p.alt} />
+              </div>
+              <figcaption>{p.caption}</figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+Object.assign(window, { Gallery });
+
+
+/* ============================================================
    LEAD MAGNET — PDF download via email
    FORMSPREE: replace LEAD_MAGNET_FORMSPREE_ID with your endpoint
 
@@ -2273,6 +2484,16 @@ function Contact() {
               I'd love to hear from you!
             </p>
 
+            {/* PHOTO PLACEHOLDER — Contact section
+                Replace ./photos/trip-4.jpg with your photo.
+                Recommended: a warm, personal shot (a quiet park moment,
+                a smiling photo with characters, golden hour at the castle).
+                4:5 portrait crop works best. */}
+            <figure className="contact-photo">
+              <img src="./photos/trip-4.jpg"
+                   alt="REPLACE: describe the photo for screen readers" />
+            </figure>
+
             <dl style={{
               marginTop: 48, display: "grid",
               gridTemplateColumns: "auto 1fr", rowGap: 16, columnGap: 32,
@@ -2471,6 +2692,7 @@ function App() {
         <PlannerNote />
         <Services layout={t.services} />
         <WhyPlanner />
+        <Gallery />
         <LeadMagnet />
         <About />
         <FAQ />
