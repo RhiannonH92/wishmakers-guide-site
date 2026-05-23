@@ -558,10 +558,11 @@ body[data-mood="plum"] {
      darker top of the gradient rather than fighting the text */
   #top > img { object-position: 60% center !important; }
   /* On mobile, replace the left-anchored gradient with a more uniform
-     top-down darkening so text stays readable across the full width */
+     top-down darkening so text stays readable across the full width.
+     Lighter than the daytime version since the photo is night. */
   #top > div:nth-of-type(1) {
     background:
-      linear-gradient(180deg, rgba(43, 27, 42, 0.78) 0%, rgba(43, 27, 42, 0.55) 55%, rgba(43, 27, 42, 0.30) 100%) !important;
+      linear-gradient(180deg, rgba(43, 27, 42, 0.62) 0%, rgba(43, 27, 42, 0.38) 55%, rgba(43, 27, 42, 0.15) 100%) !important;
   }
 
   /* -------- Eyebrow ornament -------- */
@@ -754,9 +755,17 @@ body[data-mood="plum"] {
 #guide .lead-grid > div:first-child ul li,
 #guide .lead-grid > div:first-child ul li span,
 #faqs > .container > p,
+#faqs button > span:first-child,
 #contact .contact-grid > div:first-child > p {
   font-family: "Poppins", -apple-system, "Helvetica Neue", sans-serif !important;
   font-style: normal !important;
+}
+
+/* FAQ question — match the answer size. Answer is 15.5px inline, bumped
+   to 17px by the body-bump rule. Question is 17px inline, bumped to 19px.
+   Force question down to 17px to match the rendered answer size. */
+#faqs button > span:first-child {
+  font-size: 17px !important;
 }
 
 /* FAQ answer is currently a <div> with inline padding — target it specifically.
@@ -785,6 +794,13 @@ body[data-mood="plum"] {
 #contact .contact-grid > div:first-child > p em {
   font-style: normal !important;
   font-weight: 500 !important;
+}
+
+/* About paragraphs — smaller on desktop (overrides the 15px → 16.5px body bump
+   rule above). Mobile rule further down keeps a comfortable 16px. */
+#about .about-grid > div:last-child > div,
+#about .about-grid > div:last-child > div p {
+  font-size: 15px !important;
 }
 
 </style>
@@ -1518,29 +1534,26 @@ function HeroPhoto() {
          object-position keeps the busy Spaceship Earth area to the right
          of the frame so it doesn't fight the headline on the left. */}
       <img
-        src="./Epcot%20and%20fountain.jpg"
+        src="./Epcot%20at%20night.jpg"
         alt=""
         aria-hidden="true"
         style={{
           position: "absolute", inset: 0, zIndex: -3,
           width: "100%", height: "100%",
-          objectFit: "cover", objectPosition: "70% center",
+          objectFit: "cover", objectPosition: "75% center",
         }}
       />
 
-      {/* Layer 2: directional dark gradient — anchored to the left where
-         the text lives, fading to nearly clear on the right so the photo
-         still breathes. Plus a top-down gentle wash for the nav strip
-         and bottom soft fade-into-cream to blend with the next section. */}
+      {/* Layer 2: directional gradient overlay. Photo is already night-dark
+         at the top, so we use a gentler left-anchored darkening just to give
+         text a solid base without flattening the gorgeous purple/orange lights. */}
       <div style={{
         position: "absolute", inset: 0, zIndex: -2,
         background:
-          /* Left-anchored darkening for text zone */
-          "linear-gradient(95deg, rgba(43, 27, 42, 0.78) 0%, rgba(43, 27, 42, 0.62) 35%, rgba(43, 27, 42, 0.30) 60%, rgba(43, 27, 42, 0.10) 100%),"+
+          /* Left-anchored darkening for text zone — softer than daytime version */
+          "linear-gradient(95deg, rgba(43, 27, 42, 0.62) 0%, rgba(43, 27, 42, 0.42) 38%, rgba(43, 27, 42, 0.18) 65%, rgba(43, 27, 42, 0.05) 100%),"+
           /* Soft top wash for nav contrast */
-          "linear-gradient(180deg, rgba(43, 27, 42, 0.35) 0%, rgba(43, 27, 42, 0) 28%),"+
-          /* Warm gold accent kept from the original gradient — preserves the brand glow */
-          "radial-gradient(ellipse 60% 45% at 78% 18%, rgba(232, 215, 178, 0.18) 0%, rgba(232, 215, 178, 0) 55%)",
+          "linear-gradient(180deg, rgba(43, 27, 42, 0.25) 0%, rgba(43, 27, 42, 0) 28%)",
       }} />
 
       {/* Layer 3: soft bottom fade so the photo melts into the cream page below */}
@@ -1802,6 +1815,7 @@ function ServiceCard({ s, open, onToggle }) {
       borderColor: isDark ? "var(--plum-700)" : "var(--cream-300)",
       color: isDark ? "var(--cream-100)" : "var(--ink-700)",
       minHeight: 280,
+      textAlign: "left",
     }}>
       <span style={{
         fontFamily: "var(--font-ui)", fontSize: 10, letterSpacing: "0.22em",
@@ -2029,7 +2043,7 @@ function WhyPlanner() {
             }}>
               <div style={{ marginBottom: 28 }}><BenefitIcon name={b.icon} /></div>
               <h4 style={{
-                fontFamily: "var(--font-display)", fontSize: 24, fontWeight: 500,
+                fontFamily: "var(--font-display)", fontSize: 32, fontWeight: 500,
                 color: "var(--plum-900)", margin: "0 0 12px", lineHeight: 1.15,
               }}>{b.title} <Gold>{b.word}</Gold></h4>
               <p style={{
@@ -2360,7 +2374,7 @@ function About() {
             </h2>
             <div style={{ display: "flex", flexDirection: "column", gap: 16,
                           fontFamily: "var(--font-body)", color: "var(--ink-700)",
-                          fontSize: 17, lineHeight: 1.7 }}>
+                          fontSize: 15, lineHeight: 1.7 }}>
               <p style={{ margin: 0 }}>
                 Hi! My name is Rhiannon, a Disney-obsessed trip planning enthusiast
                 here to help you make every moment of your Disney holiday truly magical.
