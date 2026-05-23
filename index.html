@@ -27,7 +27,7 @@
         UI labels:          Jost                (clean geometric, tracks well in CAPS)
    If you have the originals (e.g. Canela / Tenor / GT Sectra),
    drop the .woff2 in /fonts and update the @font-face blocks. */
-@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Jost:wght@300;400;500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Jost:wght@300;400;500;600&family=Poppins:wght@300;400;500;600&display=swap");
 
 :root {
   /* ─── COLOR — Core palette ───────────────────────────────── */
@@ -714,6 +714,70 @@ body[data-mood="plum"] {
 /* Contact dl values (15px) — covered by the 15px rule above */
 /* Lead-magnet bullets and footer copy — covered above */
 
+
+/* ============================================================
+   Poppins body — selected sections only
+   ------------------------------------------------------------
+   Scope: the elements listed by the user. Excludes the
+   "A Note from the Planner" intro (stays in Cormorant italic),
+   the FAQ question text (only the answers change), and the
+   Contact dl below the intro paragraph.
+
+   Notes:
+   - We override font-family AND font-style:normal, because most
+     of these are currently italic in Cormorant. Italic Poppins
+     reads as "emphasis", not "handwriting", which would look off.
+   - !important is required because the inline style="" sets
+     font-family directly on the element.
+   - The Poppins x-height is larger than Cormorant's, so we hold
+     sizes — they'll already look a touch bigger.
+   ============================================================ */
+
+/* The font itself */
+.poppins,
+#top .hero-aside p,
+#about .about-grid > div:last-child > div p,
+#why-me p,
+#services .container > p,
+.service-card p,
+.gallery-section > .container > p,
+#guide .lead-grid > div:first-child > p,
+#guide .lead-grid > div:first-child ul li,
+#guide .lead-grid > div:first-child ul li span,
+#faqs > .container > p,
+#contact .contact-grid > div:first-child > p {
+  font-family: "Poppins", -apple-system, "Helvetica Neue", sans-serif !important;
+  font-style: normal !important;
+}
+
+/* FAQ answer is currently a <div> with inline padding — target it specifically.
+   Selector: a div with paddingBottom + paddingRight + font-size 15.5px =
+   only the answer container. */
+#faqs div[style*="paddingBottom"][style*="font-size: 15.5px"],
+#faqs div[style*="padding-bottom"][style*="font-size: 15.5px"],
+#faqs div[style*="paddingBottom: 24"],
+#faqs div[style*="padding-bottom: 24px"] {
+  font-family: "Poppins", -apple-system, "Helvetica Neue", sans-serif !important;
+  font-style: normal !important;
+}
+
+/* Inline <em> tags inside Poppins paragraphs should also lose italic-serif
+   feel (they were styled as Cormorant gold italic). Keep the gold color
+   but drop the italic so they read as Poppins medium-weight emphasis. */
+#top .hero-aside p em,
+#about .about-grid > div:last-child > div p em,
+#why-me p em,
+#services .container > p em,
+.service-card p em,
+.gallery-section > .container > p em,
+#guide .lead-grid > div:first-child > p em,
+#guide .lead-grid > div:first-child ul li em,
+#faqs > .container > p em,
+#contact .contact-grid > div:first-child > p em {
+  font-style: normal !important;
+  font-weight: 500 !important;
+}
+
 </style>
 </head>
 <body>
@@ -1367,9 +1431,9 @@ function Nav({ heroIsLight }) {
   const overHero = !scrolled && !heroIsLight;
 
   const items = [
-    { label: "Services", href: "#services" },
-    { label: "Why me",   href: "#why-me" },
     { label: "About",    href: "#about" },
+    { label: "Why me",   href: "#why-me" },
+    { label: "Services", href: "#services" },
     { label: "FAQs",     href: "#faqs" },
   ];
 
@@ -1473,7 +1537,6 @@ function HeroPhoto() {
           </div>
         </div>
 
-        <span className="hero-scroll">Scroll</span>
       </div>
     </section>
   );
@@ -1925,11 +1988,6 @@ function WhyPlanner() {
               borderTop: "1px solid var(--cream-300)",
               paddingTop: 20, position: "relative",
             }}>
-              <span style={{
-                position: "absolute", top: 18, right: 0,
-                fontFamily: "var(--font-ui)", fontSize: 10, color: "var(--ink-400)",
-                letterSpacing: "0.08em",
-              }}>{b.n}</span>
               <div style={{ marginBottom: 28 }}><BenefitIcon name={b.icon} /></div>
               <h4 style={{
                 fontFamily: "var(--font-display)", fontSize: 24, fontWeight: 500,
@@ -2652,9 +2710,6 @@ function Footer() {
           gap: 16, flexWrap: "wrap",
         }}>
           <span>© 2026 The Wishmaker's Guide</span>
-          <span style={{ fontFamily: "var(--font-display)", fontStyle: "italic",
-                        textTransform: "none", letterSpacing: 0, fontSize: 14,
-                        color: "rgba(232,215,178,0.4)" }}>№ 01</span>
           <span>Independent planner · Not affiliated with any park or resort</span>
         </div>
       </div>
