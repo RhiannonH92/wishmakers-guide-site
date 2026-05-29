@@ -2171,7 +2171,8 @@ function LeadMagnet() {
   const [pending, setPending] = React.useState(false);
   const [email, setEmail] = React.useState("");
   const [name, setName] = React.useState("");
-  const formspreeId = window.FORMSPREE_LEAD_MAGNET_ID;
+  // MailerLite form submission endpoint (from your MailerLite embed code).
+  const MAILERLITE_FORM_URL = "https://assets.mailerlite.com/jsonp/2390201/forms/188833818868713025/subscribe";
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -2179,18 +2180,27 @@ function LeadMagnet() {
     setPending(true);
 
     try {
-      if (formspreeId && !formspreeId.startsWith("REPLACE")) {
-        const res = await fetch(`https://formspree.io/f/${formspreeId}`, {
-          method: "POST",
-          headers: { "Accept": "application/json", "Content-Type": "application/json" },
-          body: JSON.stringify({ name, email, magnet: "Disney booking timeline PDF" }),
-        });
-        if (!res.ok) throw new Error("submit failed");
-      }
+      // MailerLite expects form-encoded fields named fields[name] and fields[email].
+      const body = new URLSearchParams();
+      body.append("fields[name]", name);
+      body.append("fields[email]", email);
+      body.append("ml-submit", "1");
+      body.append("anticsrf", "true");
+
+      // 'no-cors' lets the browser send the data without being blocked by
+      // cross-origin rules. We won't be able to read the response, so we
+      // optimistically show success once the request is sent.
+      await fetch(MAILERLITE_FORM_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: body.toString(),
+      });
+
       setSent(true);
       setName(""); setEmail("");
     } catch (err) {
-      // Still show success in demo — real site will fall through to formspree handling.
+      // Network error — still show success so the visitor isn't left hanging.
       setSent(true);
     } finally {
       setPending(false);
