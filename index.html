@@ -2171,8 +2171,8 @@ function LeadMagnet() {
   const [pending, setPending] = React.useState(false);
   const [email, setEmail] = React.useState("");
   const [name, setName] = React.useState("");
-  // MailerLite form submission endpoint (from your MailerLite embed code).
-  const MAILERLITE_FORM_URL = "https://assets.mailerlite.com/jsonp/2390201/forms/188833818868713025/subscribe";
+  // Brevo form submission endpoint (from your Brevo "Simple HTML" embed code).
+  const BREVO_FORM_URL = "https://17dc549a.sibforms.com/serve/MUIFAMp5oJ-RP-yD07eMV9XnyJ1aYpReKQ36JnMglXnGizdexsmNlbU2EsZIDdUyXb_eBe47vlaZ3TcBEM6IrdtYBenBkpn1SbPUX0so8dWldVIIrs3WuCo1bBZc5IjKwaP3TyCjxDUcXAUlF5xZUkleKk30XvZEa0aAB_oifxjvU7Bhh3FYeAyf_b_uVs3xpfqKbUYf9JvbC4Oi5g==";
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -2180,17 +2180,19 @@ function LeadMagnet() {
     setPending(true);
 
     try {
-      // MailerLite expects form-encoded fields named fields[name] and fields[email].
+      // Brevo expects form-encoded fields named EMAIL and FIRSTNAME, plus a
+      // hidden honeypot 'email_address_check' that must stay EMPTY (bots fill
+      // it in; real people leave it blank) and a 'locale' field.
       const body = new URLSearchParams();
-      body.append("fields[name]", name);
-      body.append("fields[email]", email);
-      body.append("ml-submit", "1");
-      body.append("anticsrf", "true");
+      body.append("EMAIL", email);
+      body.append("FIRSTNAME", name);
+      body.append("email_address_check", "");
+      body.append("locale", "en");
 
       // 'no-cors' lets the browser send the data without being blocked by
       // cross-origin rules. We won't be able to read the response, so we
       // optimistically show success once the request is sent.
-      await fetch(MAILERLITE_FORM_URL, {
+      await fetch(BREVO_FORM_URL, {
         method: "POST",
         mode: "no-cors",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
