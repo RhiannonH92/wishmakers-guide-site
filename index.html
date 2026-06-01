@@ -2716,7 +2716,7 @@ function Contact() {
               fontFamily: "var(--font-body)", fontSize: 15,
             }}>
               {[
-                ["Reply",     <>Usually within <Gold>48 hours</Gold></>],
+                ["Reply",     <>Usually within <Gold>24 hours</Gold></>],
                 ["Email",     <a href="mailto:hello@thewishmakersguide.co.uk" style={{ color: "var(--ink-700)", borderBottom: "1px solid var(--cream-300)" }}>hello@thewishmakersguide.co.uk</a>],
                 ["Based",     <>United Kingdom, <em style={{ fontStyle: "italic", color: "var(--gold-600)" }}>working in your timezone</em></>],
               ].map(([k, v], i) => (
@@ -2786,7 +2786,7 @@ function Contact() {
                 display: "flex", alignItems: "center", gap: 10,
               }}>
                 <SparkleStar size={12} color="var(--gold-500)"/>
-                Lovely — message sent. I'll reply within 48 hours.
+                Lovely — message sent. I'll reply within 24 hours.
               </div>
             )}
           </form>
@@ -2830,12 +2830,11 @@ function Footer() {
             ] },
             { label: "Get in touch", links: [
               { t: "hello@thewishmakersguide.co.uk", h: "mailto:hello@thewishmakersguide.co.uk" },
-              { t: "Reply within 48 hours", h: null },
+              { t: "Reply within 24 hours", h: null },
               { t: "UK-based · Working in your time zone", h: null },
             ] },
             { label: "Find me", links: [
-              { t: "Instagram", h: "https://instagram.com" },
-              { t: "Pinterest", h: "https://pinterest.com" },
+              { t: "Instagram", h: "https://instagram.com/thewishmakersguide" },
             ] },
           ].map((col) => (
             <div key={col.label}>
