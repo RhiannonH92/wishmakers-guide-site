@@ -369,6 +369,10 @@ body[data-mood="plum"] {
 .field--dark input::placeholder { color: rgba(244, 235, 219, 0.35); }
 .field--dark input:focus { border-bottom-color: var(--gold-300); }
 
+/* Lead magnet — enlarged eyebrow */
+.lead-eyebrow-lg .eyebrow-ornament { font-size: 16px; letter-spacing: 0.26em; }
+.lead-eyebrow-lg .eyebrow-ornament .star { font-size: 18px; }
+
 /* Lead magnet — fanned PDF previews */
 .lead-fan {
   position: relative;
@@ -662,6 +666,7 @@ body[data-mood="plum"] {
   /* -------- Eyebrow ornament -------- */
   .eyebrow-ornament { font-size: 10px !important; letter-spacing: 0.2em !important; gap: 10px !important; }
   .eyebrow-ornament .rule { width: 20px !important; }
+  .lead-eyebrow-lg .eyebrow-ornament { font-size: 13px !important; letter-spacing: 0.24em !important; }
 
   /* -------- Buttons -------- */
   .btn { padding: 12px 18px !important; font-size: 10px !important; letter-spacing: 0.16em !important; }
@@ -2314,7 +2319,9 @@ function LeadMagnet() {
         }}>
           {/* LEFT — pitch + previews */}
           <div className="lead-pitch">
-            <Eyebrow withStars tone="light">Free guide</Eyebrow>
+            <span className="lead-eyebrow-lg">
+              <Eyebrow withStars tone="light">Free guide</Eyebrow>
+            </span>
             <h2 style={{
               fontFamily: "var(--font-display)", fontSize: 54, fontWeight: 500,
               color: "var(--cream-100)", margin: "28px 0 22px", lineHeight: 1.1,
@@ -2368,7 +2375,7 @@ function LeadMagnet() {
               </div>
               <span className="lead-fan__badge">
                 <SparkleStar size={11} color="var(--plum-900)" />
-                11 pages · free
+                Free PDF guide
               </span>
             </div>
           </div>
@@ -2420,13 +2427,7 @@ function LeadMagnet() {
                 <span>{sent ? "Sent — check your inbox ✦" : pending ? "Sending…" : "Send me the free guide"}</span>
                 {!sent && !pending && <span className="chev">›</span>}
               </button>
-              <p style={{
-                fontFamily: "var(--font-body)", fontStyle: "italic",
-                fontSize: 13, color: "rgba(244, 235, 219, 0.55)",
-                margin: "16px 0 0", lineHeight: 1.55, textAlign: "center",
-              }}>
-                No spam, ever. Just the guide and the occasional planning tip — unsubscribe any time.
-              </p>
+
             </form>
           </div>
         </div>
