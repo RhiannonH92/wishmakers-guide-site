@@ -369,6 +369,91 @@ body[data-mood="plum"] {
 .field--dark input::placeholder { color: rgba(244, 235, 219, 0.35); }
 .field--dark input:focus { border-bottom-color: var(--gold-300); }
 
+/* Lead magnet — fanned PDF previews */
+.lead-fan {
+  position: relative;
+  margin: 48px auto 0;
+  width: 100%;
+  max-width: 440px;
+  height: 300px;
+}
+.lead-fan__page {
+  position: absolute;
+  bottom: 0;
+  width: 200px;            /* A4 ratio 1:1.414 */
+  height: 283px;
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--cream-100);
+  border: 1px solid rgba(232, 215, 178, 0.35);
+  box-shadow: 0 18px 40px -14px rgba(0,0,0,0.55);
+}
+.lead-fan__page img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+.lead-fan__page--left {
+  left: 50%;
+  transform: translateX(-118%) rotate(-9deg);
+  transform-origin: bottom center;
+  z-index: 1;
+}
+.lead-fan__page--right {
+  left: 50%;
+  transform: translateX(18%) rotate(9deg);
+  transform-origin: bottom center;
+  z-index: 1;
+}
+.lead-fan__page--front {
+  left: 50%;
+  transform: translateX(-50%) rotate(0deg);
+  z-index: 2;
+  box-shadow: 0 26px 52px -14px rgba(0,0,0,0.6);
+}
+.lead-fan__badge {
+  position: absolute;
+  top: -14px; left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  display: inline-flex; align-items: center; gap: 7px;
+  background: var(--gold-300);
+  color: var(--plum-900);
+  font-family: var(--font-ui);
+  font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 7px 14px;
+  border-radius: 100px;
+  box-shadow: 0 8px 20px -6px rgba(0,0,0,0.5);
+  white-space: nowrap;
+}
+
+/* Lead magnet — mobile: stack, centre, big clear form */
+@media (max-width: 860px) {
+  .lead-grid {
+    grid-template-columns: 1fr !important;
+    gap: 44px !important;
+    text-align: center;
+  }
+  .lead-pitch p { margin-left: auto !important; margin-right: auto !important; }
+  .lead-benefits {
+    grid-template-columns: 1fr !important;
+    margin-left: auto !important; margin-right: auto !important;
+    max-width: 360px !important;
+    text-align: left;
+  }
+  .lead-fan { margin-top: 40px; max-width: 380px; height: 270px; }
+  .lead-fan__page { width: 174px; height: 246px; }
+}
+@media (max-width: 520px) {
+  .lead-fan { max-width: 320px; height: 240px; }
+  .lead-fan__page { width: 150px; height: 212px; }
+  .lead-fan__page--left  { transform: translateX(-110%) rotate(-8deg); }
+  .lead-fan__page--right { transform: translateX(10%) rotate(8deg); }
+  .lead-form { padding: 30px 22px 26px !important; }
+}
+
 /* Sparkles */
 .sparkle {
   position: absolute; color: var(--cream-100); opacity: 0.85;
@@ -2222,13 +2307,13 @@ function LeadMagnet() {
       <SparkleField stars={LEAD_SPARKLES} color="var(--cream-100)" />
 
       <div className="container" style={{ position: "relative" }}>
-        <div style={{
+        <div className="lead-grid" style={{
           display: "grid",
-          gridTemplateColumns: "minmax(0, 1.05fr) minmax(0, 1fr)",
-          gap: 80, alignItems: "center",
-        }} className="lead-grid">
-          {/* LEFT — pitch */}
-          <div>
+          gridTemplateColumns: "minmax(0, 1fr) minmax(0, 1fr)",
+          gap: 72, alignItems: "center",
+        }}>
+          {/* LEFT — pitch + previews */}
+          <div className="lead-pitch">
             <Eyebrow withStars tone="light">Free guide</Eyebrow>
             <h2 style={{
               fontFamily: "var(--font-display)", fontSize: 54, fontWeight: 500,
@@ -2248,8 +2333,8 @@ function LeadMagnet() {
               you fly.
             </p>
 
-            <ul style={{
-              listStyle: "none", padding: 0, margin: "32px 0 0",
+            <ul className="lead-benefits" style={{
+              listStyle: "none", padding: 0, margin: "30px 0 0",
               display: "grid", gridTemplateColumns: "1fr 1fr", gap: "14px 32px",
               maxWidth: 480,
             }}>
@@ -2257,7 +2342,7 @@ function LeadMagnet() {
                 "Booking windows, month-by-month",
                 "Dining reservation drop times",
                 "What to skip and what truly matters",
-                "Printable checklist"   
+                "Printable checklist"
               ].map((line, i) => (
                 <li key={i} style={{
                   display: "flex", gap: 12, alignItems: "flex-start",
@@ -2269,80 +2354,78 @@ function LeadMagnet() {
                 </li>
               ))}
             </ul>
+
+            {/* Fanned PDF previews — real pages */}
+            <div className="lead-fan" aria-hidden="false">
+              <div className="lead-fan__page lead-fan__page--left">
+                <img src="guide-content.jpg" alt="" loading="lazy" />
+              </div>
+              <div className="lead-fan__page lead-fan__page--right">
+                <img src="guide-checklist.jpg" alt="" loading="lazy" />
+              </div>
+              <div className="lead-fan__page lead-fan__page--front">
+                <img src="guide-cover.jpg" alt="A preview of the Disney World planning timeline guide" loading="lazy" />
+              </div>
+              <span className="lead-fan__badge">
+                <SparkleStar size={11} color="var(--plum-900)" />
+                11 pages · free
+              </span>
+            </div>
           </div>
 
-          {/* RIGHT — form */}
-          <div style={{ position: "relative" }}>
-            {/* Stylised PDF tile */}
-            <div style={{
-              position: "absolute", top: -36, right: -8, zIndex: 0,
-              transform: "rotate(4deg)",
-              width: 220, height: 280,
-              background: "var(--cream-50)",
-              border: "1px solid var(--cream-300)",
-              borderRadius: "var(--radius-md)",
-              boxShadow: "var(--shadow-warm), 0 24px 48px -16px rgba(0,0,0,0.4)",
-              padding: 22, display: "flex", flexDirection: "column", gap: 10,
-            }}>
-              <span style={{
-                fontFamily: "var(--font-ui)", fontSize: 9, letterSpacing: "0.24em",
-                textTransform: "uppercase", color: "var(--gold-600)", fontWeight: 500,
-              }}>Free PDF · 12 pages</span>
-              <h4 style={{
-                fontFamily: "var(--font-display)", fontWeight: 500,
-                fontSize: 22, lineHeight: 1.1, color: "var(--plum-900)", margin: 0,
-              }}>
-                The Disney&nbsp;World <em style={{ fontStyle: "italic", color: "var(--gold-500)", fontWeight: 500 }}>booking timeline</em>
-              </h4>
-              <div style={{ marginTop: "auto", display: "flex", flexDirection: "column", gap: 6 }}>
-                {["— 18 months out", "— 12 months out", "— 60 days out", "— 30 days out", "— Trip week"].map((t) => (
-                  <span key={t} style={{
-                    fontFamily: "var(--font-body)", fontStyle: "italic",
-                    fontSize: 12, color: "var(--ink-500)", lineHeight: 1.4,
-                  }}>{t}</span>
-                ))}
-              </div>
-              <span style={{
-                position: "absolute", bottom: 14, right: 14,
-                fontFamily: "var(--font-display)", fontStyle: "italic",
-                fontSize: 11, color: "var(--gold-600)",
-              }}>№ 01</span>
-            </div>
-
-            <form onSubmit={onSubmit} style={{
+          {/* RIGHT — the form */}
+          <div className="lead-form-col" style={{ position: "relative" }}>
+            <form onSubmit={onSubmit} className="lead-form" style={{
               position: "relative", zIndex: 1,
-              background: "rgba(43, 27, 42, 0.55)",
-              backdropFilter: "blur(10px)",
-              WebkitBackdropFilter: "blur(10px)",
-              border: "1px solid rgba(232, 215, 178, 0.22)",
+              background: "rgba(43, 27, 42, 0.62)",
+              backdropFilter: "blur(12px)",
+              WebkitBackdropFilter: "blur(12px)",
+              border: "1px solid rgba(232, 215, 178, 0.3)",
               borderRadius: "var(--radius-md)",
-              padding: "34px 32px 30px",
-              display: "flex", flexDirection: "column", gap: 18,
-              boxShadow: "0 18px 40px -16px rgba(0,0,0,0.35)",
+              padding: "38px 36px 32px",
+              display: "flex", flexDirection: "column", gap: 4,
+              boxShadow: "0 24px 56px -18px rgba(0,0,0,0.5)",
             }}>
-              <div className="field field--dark">
-                <label>Your name</label>
-                <input value={name} onChange={(e) => setName(e.target.value)}
+              <span style={{
+                fontFamily: "var(--font-ui)", fontSize: 11, letterSpacing: "0.2em",
+                textTransform: "uppercase", color: "var(--gold-300)", fontWeight: 500,
+              }}>Get your free copy</span>
+              <h3 style={{
+                fontFamily: "var(--font-display)", fontSize: 30, fontWeight: 500,
+                color: "var(--cream-100)", margin: "8px 0 4px", lineHeight: 1.15,
+              }}>
+                Where shall I <em style={{ fontStyle: "italic", color: "var(--gold-300)" }}>send it?</em>
+              </h3>
+              <p style={{
+                fontFamily: "var(--font-body)", fontSize: 15.5, lineHeight: 1.55,
+                color: "rgba(244, 235, 219, 0.7)", margin: "0 0 22px",
+              }}>
+                Pop your details in below and the guide lands in your inbox straight away.
+              </p>
+
+              <div className="field field--dark" style={{ marginBottom: 18 }}>
+                <label htmlFor="lead-name">Your name</label>
+                <input id="lead-name" value={name} onChange={(e) => setName(e.target.value)}
                        placeholder="First name" disabled={sent || pending}/>
               </div>
-              <div className="field field--dark">
-                <label>Email address</label>
-                <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)}
+              <div className="field field--dark" style={{ marginBottom: 8 }}>
+                <label htmlFor="lead-email">Email address</label>
+                <input id="lead-email" type="email" required value={email} onChange={(e) => setEmail(e.target.value)}
                        placeholder="you@email.com" disabled={sent || pending}/>
               </div>
               <button type="submit" className="btn btn--primary"
                       disabled={sent || pending}
-                      style={{ marginTop: 8, justifyContent: "center", padding: "16px 24px",
-                               opacity: sent ? 0.85 : 1 }}>
-                <span>{sent ? "Sent — check your inbox" : pending ? "Sending…" : "Send me the PDF"}</span>
-                {!sent && <span className="chev">›</span>}
+                      style={{ marginTop: 18, justifyContent: "center", padding: "17px 24px",
+                               fontSize: 15, opacity: sent ? 0.85 : 1 }}>
+                <span>{sent ? "Sent — check your inbox ✦" : pending ? "Sending…" : "Send me the free guide"}</span>
+                {!sent && !pending && <span className="chev">›</span>}
               </button>
               <p style={{
                 fontFamily: "var(--font-body)", fontStyle: "italic",
-                fontSize: 12, color: "rgba(244, 235, 219, 0.6)",
-                margin: 0, lineHeight: 1.55, textAlign: "center",
+                fontSize: 13, color: "rgba(244, 235, 219, 0.55)",
+                margin: "16px 0 0", lineHeight: 1.55, textAlign: "center",
               }}>
-                
+                No spam, ever. Just the guide and the occasional planning tip — unsubscribe any time.
               </p>
             </form>
           </div>
