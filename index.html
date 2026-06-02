@@ -13,6 +13,35 @@
   window.FORMSPREE_LEAD_MAGNET_ID = "mqejneel";
 </script>
 
+<!-- Google Analytics — loads ONLY after the visitor accepts cookies (UK GDPR friendly). -->
+<script>
+  window.GA_MEASUREMENT_ID = "G-8N7K4MQGXB";
+
+  // Loads the Google Analytics script. Called only after consent.
+  function loadGoogleAnalytics() {
+    if (window.__gaLoaded) return;
+    window.__gaLoaded = true;
+
+    var s = document.createElement("script");
+    s.async = true;
+    s.src = "https://www.googletagmanager.com/gtag/js?id=" + window.GA_MEASUREMENT_ID;
+    document.head.appendChild(s);
+
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    window.gtag = gtag;
+    gtag("js", new Date());
+    gtag("config", window.GA_MEASUREMENT_ID);
+  }
+
+  // Load analytics immediately (no consent banner active).
+  // To re-enable consent gating later, remove this line and restore the
+  // localStorage check + banner below.
+  loadGoogleAnalytics();
+
+</script>
+
+
 <style id="design-system">
 /* ============================================================
    The Wishmaker's Guide — Colors & Type
@@ -2969,7 +2998,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(<App />);
   }
   window.addEventListener("hashchange", scrollToHash);
 })();
-
 </script>
 </body>
 </html>
